@@ -1,3 +1,6 @@
+
+const SOLD_IDS = new Set([1, 2, 3, 4, 5,  6, 8, 10, 11, 16, 18, 21, 25, 67, 87, 90, 100, 22, 667, 211, 500, ]);
+
 const quotes = [
   {
     text: "Tokenization and stable coins might be the name of the game really this year.",
@@ -56,68 +59,53 @@ const bindTap = (element, handler) => {
   element.addEventListener("click", onClick);
 };
 
-const quoteCarousel = document.querySelector("[data-quote-carousel]");
-const quoteSlides = document.querySelector("[data-quote-slides]");
-const nextBtn = document.querySelector("[data-quote-next]");
-const prevBtn = document.querySelector("[data-quote-prev]");
+// ── WEF Carousel ──────────────────────────────────────────────────────────
+const wefText = document.getElementById("wefText");
+const wefAuthor = document.getElementById("wefAuthor");
+const wefDotsEl = document.getElementById("wefDots");
+const wefPrevBtn = document.getElementById("wefPrev");
+const wefNextBtn = document.getElementById("wefNext");
+const wefFrame = document.getElementById("wefFrame");
 
-if (quoteCarousel && quoteSlides && nextBtn && prevBtn) {
-  quotes.forEach(({ text, meta }) => {
-    const slide = document.createElement("div");
-    slide.className = "quote-slide";
+if (wefText && wefAuthor && wefDotsEl) {
+  let wefIdx = 0;
+  let wefTimer = null;
 
-    const card = document.createElement("div");
-    card.className = "quote-card";
-
-    const blockquote = document.createElement("blockquote");
-    blockquote.textContent = `"${text}"`;
-    if (text.length > 150) {
-      blockquote.classList.add("is-long");
-    }
-
-    const metaEl = document.createElement("div");
-    metaEl.className = "quote-meta";
-    metaEl.textContent = meta;
-
-    card.appendChild(blockquote);
-    card.appendChild(metaEl);
-    slide.appendChild(card);
-    quoteSlides.appendChild(slide);
+  quotes.forEach((_, i) => {
+    const dot = document.createElement("button");
+    dot.className = "wef-dot" + (i === 0 ? " is-active" : "");
+    dot.setAttribute("aria-label", `Quote ${i + 1}`);
+    dot.type = "button";
+    dot.addEventListener("click", () => wefGoTo(i));
+    wefDotsEl.appendChild(dot);
   });
 
-  const slides = Array.from(quoteSlides.querySelectorAll(".quote-slide"));
-  let index = 0;
+  const wefDots = Array.from(wefDotsEl.querySelectorAll(".wef-dot"));
 
-  const update = () => {
-    slides.forEach((slide) => (slide.className = "quote-slide"));
-    const left = (index - 1 + slides.length) % slides.length;
-    const right = (index + 1) % slides.length;
-
-    slides[left].classList.add("left");
-    slides[index].classList.add("center");
-    slides[right].classList.add("right");
+  const wefGoTo = (idx) => {
+    wefIdx = ((idx % quotes.length) + quotes.length) % quotes.length;
+    if (wefFrame) wefFrame.classList.add("is-fading");
+    clearTimeout(wefTimer);
+    setTimeout(() => {
+      const q = quotes[wefIdx];
+      wefText.textContent = `"${q.text}"`;
+      wefAuthor.textContent = q.meta;
+      wefDots.forEach((d, i) => d.classList.toggle("is-active", i === wefIdx));
+      if (wefFrame) wefFrame.classList.remove("is-fading");
+    }, 280);
+    wefTimer = setTimeout(() => wefGoTo(wefIdx + 1), 5200);
   };
 
-  const next = () => {
-    index = (index + 1) % slides.length;
-    update();
-  };
+  const q0 = quotes[0];
+  wefText.textContent = `"${q0.text}"`;
+  wefAuthor.textContent = q0.meta;
 
-  const prev = () => {
-    index = (index - 1 + slides.length) % slides.length;
-    update();
-  };
+  if (wefPrevBtn) bindTap(wefPrevBtn, () => wefGoTo(wefIdx - 1));
+  if (wefNextBtn) bindTap(wefNextBtn, () => wefGoTo(wefIdx + 1));
 
-  nextBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    next();
-  });
-  prevBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    prev();
-  });
-  update();
+  wefTimer = setTimeout(() => wefGoTo(1), 5200);
 }
+// ──────────────────────────────────────────────────────────────────────────
 
 const circleFlip = document.getElementById("circleFlip");
 const circleBackTitle = document.getElementById("circleBackTitle");
@@ -521,305 +509,286 @@ if (parallaxItems.length && !reducedMotion.matches) {
   onScroll();
 }
 
-const boardShell = document.querySelector("[data-board-shell]");
-const boardViewport = document.querySelector("[data-board-viewport]");
-const boardCanvas = document.querySelector("[data-board-canvas]");
-const boardGrid = document.querySelector("[data-board-grid]");
+const boardGridStatic = document.getElementById("boardGridStatic");
+const boardSoldCountEl = document.getElementById("boardSoldCount");
+const boardAvailCountEl = document.getElementById("boardAvailCount");
+const boardProgressFill = document.getElementById("boardProgressFill");
+const boardProgressLabel = document.getElementById("boardProgressLabel");
 
-if (boardShell && boardViewport && boardCanvas && boardGrid) {
-  const BOARD = {
-    walletCount: 1000,
-    cols: 50,
-    tilePx: 14,
-    minZoom: 0.92,
-    maxZoom: 4.5,
-    zoomSpeed: 0.0018,
-    persistLocal: false,
-    storageKey: "dynk.founderBoard.v1",
-    cycle: ["available", "sold"],
-  };
+if (boardGridStatic) {
+  const WALLET_COUNT = 800;
+  // Add sold wallet IDs here
+  
 
-  // Add sold wallet IDs here (e.g., [1,2,3,10,57])
-  const SOLD_IDS = [1, 3, 6, 8, 10, 11, 16, 18, 25, 67, 90, 100, 87];
+  const frag = document.createDocumentFragment();
+  for (let i = 1; i <= WALLET_COUNT; i++) {
+    const tile = document.createElement("div");
+    tile.className = "board-tile-static" + (SOLD_IDS.has(i) ? " is-sold" : "");
+    tile.setAttribute("data-num", `#${String(i).padStart(3, "0")}`);
+    frag.appendChild(tile);
+  }
+  boardGridStatic.appendChild(frag);
 
-  const STATUSES = new Set(BOARD.cycle);
-  let statusById = new Array(BOARD.walletCount + 1).fill("available");
+  const soldCount = SOLD_IDS.size;
+  const availCount = WALLET_COUNT - soldCount;
+  const pct = ((soldCount / WALLET_COUNT) * 100).toFixed(1);
 
-  let scale = 1;
-  let tx = 0;
-  let ty = 0;
-  let minZoom = BOARD.minZoom;
-  let isActive = false;
-
-  let pointerDown = false;
-  let isPanning = false;
-  let isPainting = false;
-  let lastX = 0;
-  let lastY = 0;
-
-  const pad4 = (n) => String(n).padStart(4, "0");
-  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-
-  const getCols = () => {
-    if (BOARD.cols && BOARD.cols > 0) {
-      return BOARD.cols;
-    }
-    return Math.ceil(Math.sqrt(BOARD.walletCount));
-  };
-
-  const applyTransform = () => {
-    boardCanvas.style.transform = `translate(${tx}px, ${ty}px) scale(${scale}) translate(-50%, -50%)`;
-  };
-
-  const zoomAt = (clientX, clientY, deltaY) => {
-    const oldScale = scale;
-    const factor = Math.exp(-deltaY * BOARD.zoomSpeed);
-    const nextScale = clamp(oldScale * factor, minZoom, BOARD.maxZoom);
-
-    const r = boardViewport.getBoundingClientRect();
-    const centerX = r.left + r.width / 2;
-    const centerY = r.top + r.height / 2;
-    const qx = (clientX - centerX - tx) / oldScale;
-    const qy = (clientY - centerY - ty) / oldScale;
-
-    scale = nextScale;
-    tx = clientX - centerX - scale * qx;
-    ty = clientY - centerY - scale * qy;
-    applyTransform();
-  };
-
-  const updateSizing = () => {
-    const cols = getCols();
-    const rows = Math.ceil(BOARD.walletCount / cols);
-    const rect = boardViewport.getBoundingClientRect();
-    const tilePx = Math.max(6, Math.floor(rect.width / cols));
-    BOARD.tilePx = tilePx;
-    boardShell.style.setProperty("--board-tile", `${tilePx}px`);
-    boardShell.style.setProperty("--board-label", tilePx <= 12 ? "6px" : "7px");
-    boardGrid.classList.toggle("is-compact", tilePx <= 10);
-    boardGrid.style.gridTemplateColumns = `repeat(${cols}, ${tilePx}px)`;
-    boardViewport.style.height = `${rows * tilePx}px`;
-    minZoom = BOARD.minZoom;
-    if (scale < minZoom) {
-      scale = minZoom;
-    }
-    if (scale > minZoom) {
-      scale = minZoom;
-    }
-    tx = 0;
-    ty = 0;
-    applyTransform();
-    return { cols, rows };
-  };
-
-  const save = () => {
-    if (!BOARD.persistLocal) return;
-    try {
-      localStorage.setItem(BOARD.storageKey, JSON.stringify({ statusById }));
-    } catch (e) {}
-  };
-
-  const load = () => {
-    if (!BOARD.persistLocal) return;
-    try {
-      const raw = localStorage.getItem(BOARD.storageKey);
-      if (!raw) return;
-      const parsed = JSON.parse(raw);
-      if (
-        parsed &&
-        Array.isArray(parsed.statusById) &&
-        parsed.statusById.length === BOARD.walletCount + 1
-      ) {
-        statusById = parsed.statusById.map((s) =>
-          STATUSES.has(s) ? s : "available",
-        );
-      }
-    } catch (e) {}
-  };
-
-  const setActive = (value) => {
-    isActive = value;
-    boardShell.classList.toggle("is-active", value);
-    boardShell.classList.toggle("is-locked", !value);
-  };
-
-  const setStatus = (id, status) => {
-    if (!STATUSES.has(status)) return;
-    statusById[id] = status;
-    const el = boardGrid.querySelector(`[data-id="${id}"]`);
-    if (el) el.dataset.status = status;
-  };
-
-  const nextStatus = (current) => {
-    const idx = BOARD.cycle.indexOf(current);
-    if (idx === -1) return BOARD.cycle[0];
-    return BOARD.cycle[(idx + 1) % BOARD.cycle.length];
-  };
-
-  const paintTile = (el) => {
-    const id = Number(el.dataset.id);
-    const status = nextStatus(statusById[id]);
-    setStatus(id, status);
-  };
-
-  const tileFromEvent = (e) => {
-    const tile = e.target.closest(".board-tile");
-    if (!tile || !tile.dataset.id) return null;
-    return tile;
-  };
-
-  const applySoldIds = () => {
-    SOLD_IDS.forEach((id) => {
-      if (id >= 1 && id <= BOARD.walletCount) {
-        statusById[id] = "sold";
-      }
-    });
-  };
-
-  const build = () => {
-    const { cols, rows } = updateSizing();
-    boardGrid.innerHTML = "";
-    const totalTiles = cols * rows;
-    const frag = document.createDocumentFragment();
-    for (let i = 1; i <= totalTiles; i++) {
-      const tile = document.createElement("div");
-      tile.className = "board-tile";
-      if (i <= BOARD.walletCount) {
-        tile.dataset.id = String(i);
-        tile.dataset.status = statusById[i] || "available";
-        const label = document.createElement("span");
-        label.textContent = pad4(i);
-        tile.appendChild(label);
-      } else {
-        tile.classList.add("is-empty");
-      }
-      frag.appendChild(tile);
-    }
-    boardGrid.appendChild(frag);
-  };
-
-  const activateBoard = () => {
-    if (isActive) return;
-    setActive(true);
-  };
-
-  boardShell.addEventListener("click", activateBoard);
-
-  boardViewport.addEventListener(
-    "wheel",
-    (event) => {
-      if (!isActive) return;
-      event.preventDefault();
-      const r = boardViewport.getBoundingClientRect();
-      const cx = r.left + r.width / 2;
-      const cy = r.top + r.height / 2;
-      zoomAt(cx, cy, event.deltaY);
-    },
-    { passive: false },
-  );
-
-  boardViewport.addEventListener("pointerdown", (event) => {
-    if (!isActive) return;
-    pointerDown = true;
-    lastX = event.clientX;
-    lastY = event.clientY;
-
-    const tile = tileFromEvent(event);
-    if (tile && event.shiftKey) {
-      isPainting = true;
-      paintTile(tile);
-      save();
-      boardViewport.setPointerCapture(event.pointerId);
-      return;
-    }
-
-    isPanning = true;
-    boardViewport.setPointerCapture(event.pointerId);
-  });
-
-  boardViewport.addEventListener("pointermove", (event) => {
-    if (!pointerDown || !isActive) return;
-
-    if (isPainting) {
-      const tile = tileFromEvent(event);
-      if (tile) {
-        paintTile(tile);
-        save();
-      }
-      return;
-    }
-
-    if (isPanning) {
-      const dx = event.clientX - lastX;
-      const dy = event.clientY - lastY;
-      lastX = event.clientX;
-      lastY = event.clientY;
-      tx += dx;
-      ty += dy;
-      applyTransform();
-    }
-  });
-
-  const endPointer = (event) => {
-    pointerDown = false;
-    isPanning = false;
-    isPainting = false;
-    try {
-      boardViewport.releasePointerCapture(event.pointerId);
-    } catch (_) {}
-  };
-
-  boardViewport.addEventListener("pointerup", endPointer);
-  boardViewport.addEventListener("pointercancel", endPointer);
-
-  boardGrid.addEventListener("click", (event) => {
-    if (!isActive) return;
-    const tile = tileFromEvent(event);
-    if (!tile) return;
-    paintTile(tile);
-    save();
-  });
-
-  boardViewport.addEventListener("dblclick", (event) => {
-    if (!isActive) return;
-    event.preventDefault();
-    zoomAt(event.clientX, event.clientY, -220);
-  });
-
-  load();
-  applySoldIds();
-  build();
-  scale = minZoom;
-  tx = 0;
-  ty = 0;
-  applyTransform();
-  setActive(false);
-
-  window.addEventListener("resize", () => {
-    updateSizing();
-  });
+  if (boardSoldCountEl) boardSoldCountEl.textContent = soldCount;
+  if (boardAvailCountEl) boardAvailCountEl.textContent = availCount;
+  if (boardProgressFill) boardProgressFill.style.width = `${pct}%`;
+  if (boardProgressLabel) boardProgressLabel.textContent = `${soldCount} of ${WALLET_COUNT} claimed`;
 
   window.DynkBoard = {
     setSold(ids) {
       if (!Array.isArray(ids)) return;
       ids.forEach((id) => {
-        if (id >= 1 && id <= BOARD.walletCount) {
-          setStatus(id, "sold");
-        }
+        SOLD_IDS.add(id);
+        const tile = boardGridStatic.children[id - 1];
+        if (tile) tile.classList.add("is-sold");
       });
-      save();
     },
     setAvailable(ids) {
       if (!Array.isArray(ids)) return;
       ids.forEach((id) => {
-        if (id >= 1 && id <= BOARD.walletCount) {
-          setStatus(id, "available");
-        }
+        SOLD_IDS.delete(id);
+        const tile = boardGridStatic.children[id - 1];
+        if (tile) tile.classList.remove("is-sold");
       });
-      save();
     },
   };
 }
 
+const revealEls = document.querySelectorAll(".reveal");
+if (revealEls.length) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08 },
+  );
+  revealEls.forEach((el) => observer.observe(el));
+}
 
+const cursorGlow = document.querySelector("[data-cursor-glow]");
+const heroStage = document.querySelector("[data-hero-stage]");
+const depthLayers = Array.from(document.querySelectorAll("[data-depth]"));
+const sectionLinks = Array.from(document.querySelectorAll(".section-index a"));
+const immersiveSections = Array.from(
+  document.querySelectorAll(".immersive-section[id]"),
+);
 
+if (cursorGlow && !reducedMotion.matches) {
+  const moveGlow = (event) => {
+    cursorGlow.style.left = `${event.clientX}px`;
+    cursorGlow.style.top = `${event.clientY}px`;
+  };
+
+  window.addEventListener("pointermove", moveGlow, { passive: true });
+}
+
+if (heroStage && depthLayers.length && !reducedMotion.matches) {
+  const updateDepth = (event) => {
+    const rect = heroStage.getBoundingClientRect();
+    const px = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    const py = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+
+    depthLayers.forEach((layer) => {
+      const depth = parseFloat(layer.dataset.depth || "0");
+      const x = px * depth * 48;
+      const y = py * depth * 48;
+      layer.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    });
+  };
+
+  const resetDepth = () => {
+    depthLayers.forEach((layer) => {
+      layer.style.transform = "";
+    });
+  };
+
+  heroStage.addEventListener("pointermove", updateDepth);
+  heroStage.addEventListener("pointerleave", resetDepth);
+}
+
+if (sectionLinks.length && immersiveSections.length) {
+  const activateSection = (id) => {
+    sectionLinks.forEach((link) => {
+      const isMatch = link.getAttribute("href") === `#${id}`;
+      link.classList.toggle("is-active", isMatch);
+    });
+  };
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      const visibleEntry = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (visibleEntry?.target?.id) {
+        activateSection(visibleEntry.target.id);
+      }
+    },
+    {
+      threshold: [0.2, 0.4, 0.65],
+      rootMargin: "-20% 0px -35% 0px",
+    },
+  );
+
+  immersiveSections.forEach((section) => sectionObserver.observe(section));
+}
+
+const heroProgressSection = document.querySelector("[data-hero-progress]");
+const protocolSection = document.querySelector("[data-protocol-section]");
+const protocolItems = Array.from(document.querySelectorAll(".circle-item"));
+
+// ── Sticky showcase cards ────────────────────────────────────────────────
+const showcaseOuter = document.querySelector("[data-showcase-scroll]");
+const showcaseCards = Array.from(document.querySelectorAll("[data-showcase-step]"));
+
+if (showcaseOuter && showcaseCards.length && !reducedMotion.matches) {
+  const updateShowcase = () => {
+    const rect = showcaseOuter.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const scrolled = Math.max(0, -rect.top);
+    const total = Math.max(showcaseOuter.offsetHeight - vh, 1);
+    const progress = Math.min(scrolled / total, 1);
+
+    if (progress <= 0) {
+      showcaseCards.forEach(c => c.classList.remove("is-scroll-active"));
+      return;
+    }
+    const idx = Math.min(showcaseCards.length - 1, Math.floor(progress * showcaseCards.length));
+    showcaseCards.forEach((c, i) => c.classList.toggle("is-scroll-active", i === idx));
+  };
+
+  window.addEventListener("scroll", updateShowcase, { passive: true });
+  window.addEventListener("resize", updateShowcase);
+  updateShowcase();
+}
+// ─────────────────────────────────────────────────────────────────────────
+
+if (!reducedMotion.matches) {
+  let scrollFrame = null;
+
+  const setProtocolItem = (item) => {
+    if (!item) return;
+
+    protocolItems.forEach((entry) => {
+      entry.classList.toggle("is-scrolled-active", entry === item);
+    });
+
+    if (
+      circleFlip &&
+      circleBackTitle &&
+      circleBackText &&
+      circleBackQuote &&
+      circleBackQuoteMeta
+    ) {
+      circleBackTitle.textContent = item.dataset.title || "Protocol";
+      circleBackText.textContent =
+        item.dataset.text || "A discreet layer in the Dynk architecture.";
+      circleBackQuote.textContent = `"${item.dataset.quote || ""}"`;
+      circleBackQuoteMeta.textContent = item.dataset.quoteMeta || "";
+      circleFlip.classList.add("is-flipped");
+    }
+  };
+
+  const updateScrollScenes = () => {
+    if (heroProgressSection) {
+      const rect = heroProgressSection.getBoundingClientRect();
+      const span = Math.max(rect.height - window.innerHeight, 1);
+      const progress = Math.min(Math.max(-rect.top / span, 0), 1);
+      heroProgressSection.style.setProperty("--hero-progress", progress.toFixed(3));
+    }
+
+    if (protocolSection && protocolItems.length) {
+      const rect = protocolSection.getBoundingClientRect();
+      const span = Math.max(rect.height - window.innerHeight, 1);
+      const progress = Math.min(Math.max(-rect.top / span, 0), 1);
+      const stepIndex = Math.min(
+        protocolItems.length - 1,
+        Math.floor(progress * protocolItems.length),
+      );
+      setProtocolItem(protocolItems[stepIndex]);
+    }
+
+    scrollFrame = null;
+  };
+
+  const onSceneScroll = () => {
+    if (scrollFrame !== null) return;
+    scrollFrame = window.requestAnimationFrame(updateScrollScenes);
+  };
+
+  window.addEventListener("scroll", onSceneScroll, { passive: true });
+  window.addEventListener("resize", onSceneScroll);
+  onSceneScroll();
+}
+
+// ── AI Agent — static frame scrub ────────────────────────────────────────
+// Frames were pre-extracted via ffmpeg: media/frames/agent/frame_0001.jpg … frame_0120.jpg
+const agentOuter  = document.querySelector("[data-agent-scroll]");
+const agentCanvas = document.getElementById("agentCanvas");
+const agentPhase1 = document.getElementById("agentPhase1");
+const agentPhase2 = document.getElementById("agentPhase2");
+const agentFill   = document.getElementById("agentProgressFill");
+
+if (agentOuter && agentCanvas && !reducedMotion.matches) {
+  const agentCtx = agentCanvas.getContext("2d");
+  const FRAME_COUNT = 120;
+  const frames = [];
+  let loadedCount = 0;
+
+  // Pre-load all frames immediately — browser caches them in parallel
+  for (let i = 0; i < FRAME_COUNT; i++) {
+    const n = String(i + 1).padStart(4, "0");
+    const img = new Image();
+    img.src = `media/frames/agent/frame_${n}.jpg`;
+    img.onload = () => {
+      loadedCount++;
+      // Size canvas once from first loaded frame
+      if (loadedCount === 1) {
+        agentCanvas.width  = img.naturalWidth;
+        agentCanvas.height = img.naturalHeight;
+        drawAgentFrame(); // show first frame immediately
+      }
+    };
+    frames.push(img);
+  }
+
+  // ── Progress calculation ─────────────────────────────────────────────────
+  const getAgentProgress = () => {
+    const rect    = agentOuter.getBoundingClientRect();
+    const scrolled = Math.max(0, -rect.top);
+    const total    = Math.max(agentOuter.offsetHeight - window.innerHeight, 1);
+    return Math.min(scrolled / total, 1);
+  };
+
+  const drawAgentFrame = () => {
+    const progress = getAgentProgress();
+    const idx = Math.min(FRAME_COUNT - 1, Math.floor(progress * FRAME_COUNT));
+    const img = frames[idx];
+
+    if (img && img.complete && img.naturalWidth && agentCanvas.width) {
+      agentCtx.drawImage(img, 0, 0, agentCanvas.width, agentCanvas.height);
+    }
+
+    if (agentFill) agentFill.style.width = `${progress * 100}%`;
+
+    if (agentPhase1 && agentPhase2) {
+      const showPhase2 = progress >= 0.5;
+      agentPhase1.classList.toggle("is-hidden", showPhase2);
+      agentPhase2.classList.toggle("is-hidden", !showPhase2);
+    }
+  };
+
+  window.addEventListener("scroll", drawAgentFrame, { passive: true });
+  window.addEventListener("resize", drawAgentFrame);
+  drawAgentFrame();
+}
+// ─────────────────────────────────────────────────────────────────────────

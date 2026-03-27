@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no" />
     <title>DYNK</title>
-    <link rel="icon" type="image/png" href="icon.png" />
+    <link rel="icon" type="image/png" href="media/images/icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,7 +22,7 @@
         --paper: rgba(252, 252, 252, 1);
         --veil: rgba(252, 252, 252, 0.08);
         --mist: rgba(252, 252, 252, 0.28);
-        --glow: rgba(252, 252, 252, 0.7);
+        --glow: rgba(252, 252, 252, 0.7);    
         --pulse: rgba(252, 252, 252, 0.45);
         --ember: rgba(255, 128, 0, 0.18);
         --ember-soft: rgba(255, 128, 0, 0.08);
@@ -37,46 +37,19 @@
         height: auto;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       html,
       body {
         margin: 0;
         font-family: "Montserrat", sans-serif;
         color: var(--paper);
-        background:
-          radial-gradient(
-            800px 400px at 10% 0%,
-            rgba(252, 252, 252, 0.07),
-            transparent 60%
-          ),
-          radial-gradient(
-            1200px 600px at 90% 0%,
-            rgba(252, 252, 252, 0.07),
-            transparent 65%
-          ),
-          radial-gradient(
-            580px 520px at 23% 40%,
-            rgba(252, 252, 252, 0.06),
-            transparent 60%
-          ),
-          radial-gradient(
-            900px 700px at 95% 6%,
-            rgba(252, 252, 252, 0.01),
-            transparent 60%
-          ),
-          radial-gradient(
-            900px 700px at 110% 67%,
-            rgba(255, 128, 0, 0.1),
-            transparent 60%
-          ),
-          radial-gradient(
-            900px 900px at 68% 60%,
-            rgba(252, 252, 252, 0.01),
-            transparent 60%
-          ),
-          linear-gradient(180deg, #080808 0%, #050505 35%, #020202 100%);
+        background: #090909;
         min-height: 100vh;
         letter-spacing: 0.01em;
-        overflow-x: hidden;
+        overflow-x: clip;
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
@@ -105,16 +78,21 @@
       .grain.pos2 {
         opacity: 0.6;
         transform: translateY(1000px);
-        color: red;
       }
 
       header {
-        position: relative;
-        z-index: 2;
+        position: sticky;
+        top: 0;
+        z-index: 20;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 32px clamp(24px, 6vw, 80px);
+        padding: 24px clamp(24px, 6vw, 80px);
+        background: rgba(8, 8, 8, 0.82);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-bottom: 1px solid rgba(252, 252, 252, 0.06);
+        transition: background 0.3s ease, border-color 0.3s ease;
       }
 
       .logo {
@@ -222,8 +200,14 @@
 
       .cta:hover {
         border-color: var(--glow);
-        box-shadow: 0 0 40px rgba(252, 252, 252, 0.15);
+        box-shadow: 0 0 40px rgba(252, 252, 252, 0.15), 0 0 80px rgba(252, 252, 252, 0.05);
         transform: translateY(-2px);
+      }
+
+      .cta--sm {
+        margin-top: 16px;
+        font-size: 11px;
+        padding: 11px 24px;
       }
 
       .stats {
@@ -238,9 +222,15 @@
         flex-direction: column-reverse;
         gap: 6px;
         padding: 18px 20px;
-        border-radius: 16px;
-        background: rgba(252, 252, 252, 0.04);
-        border: 1px solid rgba(252, 252, 252, 0.1);
+        border-radius: 14px;
+        background: rgba(252, 252, 252, 0.03);
+        border: 1px solid rgba(252, 252, 252, 0.07);
+        transition: border-color 0.3s ease, background 0.3s ease;
+      }
+
+      .stat:hover {
+        border-color: rgba(252, 252, 252, 0.14);
+        background: rgba(252, 252, 252, 0.05);
       }
 
       .stat strong {
@@ -268,13 +258,15 @@
       .signal-card {
         padding: 26px 28px;
         border-radius: 18px;
-        border: 1px solid rgba(252, 252, 252, 0.12);
-        background: linear-gradient(
-          160deg,
-          rgba(252, 252, 252, 0.1),
-          rgba(252, 252, 252, 0.02)
-        );
+        border: 1px solid rgba(252, 252, 252, 0.07);
+        background: rgba(252, 252, 252, 0.03);
         backdrop-filter: blur(10px);
+        transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .signal-card:hover {
+        border-color: rgba(252, 252, 252, 0.14);
+        transform: translateY(-2px);
       }
 
       .signal-card strong {
@@ -298,7 +290,7 @@
       .circle-section {
         position: relative;
         padding: 10px 0 40px;
-        overflow: hidden;
+        overflow: visible;
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
         gap: clamp(32px, 8vw, 120px);
@@ -455,28 +447,16 @@
         text-align: left;
         border-radius: 22px;
         overflow: hidden;
-        border: 1px solid rgba(252, 252, 252, 0.2);
-        background: linear-gradient(160deg, #212320, #060606);
+        border: 1px solid rgba(252, 252, 252, 0.1);
+        background: rgba(12, 12, 12, 0.97);
         backdrop-filter: blur(10px);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
         transform: translateY(-10px);
         position: relative;
       }
 
       .circle-back::after {
-        content: "";
-        position: absolute;
-        inset: 8px;
-        border-radius: 18px;
-        background: linear-gradient(
-          120deg,
-          transparent,
-          rgba(252, 252, 252, 0.12),
-          transparent
-        );
-        opacity: 0.55;
-        pointer-events: none;
-        z-index: 0;
+        content: none;
       }
 
       .circle-back-inner {
@@ -556,7 +536,7 @@
         width: var(--icon);
         height: var(--icon);
         margin: 0 auto 1rem;
-        background: linear-gradient(145deg, #030303, #000000);
+        background: linear-gradient(145deg, #212320, #050505);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -594,52 +574,6 @@
 
       .circle-center img {
         width: min(400px, 56vw);
-      }
-
-      .circle-item {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: var(--item);
-        transform: translate(-50%, -50%) rotate(calc(36deg * var(--i)))
-          translateY(calc(var(--radius) * -1)) rotate(calc(-36deg * var(--i)));
-        text-align: center;
-        transition:
-          transform 0.3s ease,
-          opacity 0.3s ease;
-      }
-
-      .circle-item:hover {
-        transform: translate(-50%, -50%) rotate(calc(36deg * var(--i)))
-          translateY(calc(var(--radius) * -1)) rotate(calc(-36deg * var(--i)))
-          scale(1.08);
-      }
-
-      .circle-icon {
-        width: var(--icon);
-        height: var(--icon);
-        margin: 0 auto 1rem;
-        background: linear-gradient(145deg, #212320, #050505);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-        border: 1px solid rgba(252, 252, 252, 0.2);
-      }
-
-      .circle-icon i {
-        font-size: calc(var(--icon) * 0.22);
-        color: rgba(252, 252, 252, 0.9);
-      }
-
-      .circle-label {
-        font-weight: 600;
-        font-size: 0.78rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--paper);
-        opacity: 0.8;
       }
 
       .feature-rail h2 {
@@ -692,211 +626,186 @@
         line-height: 1.6;
       }
 
-      .quote-section {
-        display: grid;
-        gap: 24px;
-        padding: 120px 0 50px;
+      /* ─── WEF Section ─── */
+      .wef-section {
         position: relative;
+        padding: clamp(80px, 12vh, 160px) clamp(24px, 6vw, 80px);
+        overflow: hidden;
       }
 
-      .quote-section h2 {
-        margin: 0;
-        font-size: clamp(18px, 2.8vw, 30px);
-        letter-spacing: 0.18em;
-      }
-
-      .quote-layout {
-        display: grid;
-        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-        gap: clamp(36px, 7vw, 96px);
-        align-items: center;
-        padding-left: clamp(60px, 8vw, 160px);
-      }
-
-      .quote-copy {
-        display: grid;
-        gap: 18px;
-        max-width: 480px;
-        justify-self: start;
-        order: 2;
-        z-index: 1;
-        padding-left: clamp(8px, 2vw, 24px);
-      }
-
-      .quote-carousel {
-        order: 1;
-        z-index: 2;
-        overflow: visible;
-        margin-left: clamp(8px, 2vw, 24px);
-      }
-
-      .quote-copy .showcase-title {
-        margin: 0;
-        font-size: clamp(26px, 4vw, 46px);
-        font-weight: 600;
-        letter-spacing: 0.06em;
-      }
-
-      .quote-subtitle {
-        margin: 0;
-        font-size: 14px;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color: var(--mist);
-      }
-
-      .quote-section::before {
+      .wef-section::before {
         content: "";
         position: absolute;
-        left: 0;
-        right: 0;
-        top: -40px;
-        height: 120px;
-        background: linear-gradient(
-          180deg,
-          rgba(12, 12, 12, 0),
-          rgba(12, 12, 12, 0.6),
-          rgba(12, 12, 12, 0)
-        );
+        inset: 0;
+        background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(252, 252, 252, 0.025), transparent 70%);
         pointer-events: none;
       }
 
-      .quote-section::after {
+      .wef-section::after {
         content: "";
         position: absolute;
         left: 10%;
         right: 10%;
         top: 0;
         height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(252, 252, 252, 0.22),
-          transparent
-        );
+        background: linear-gradient(90deg, transparent, rgba(252, 252, 252, 0.18), transparent);
         pointer-events: none;
       }
 
-      .quote-carousel {
-        position: relative;
-        width: min(480px, 100%);
-        height: 240px;
-        margin: 0;
-        padding-top: 8px;
+      .wef-inner {
+        max-width: 820px;
+        margin: 0 auto;
+        display: grid;
+        gap: clamp(40px, 6vh, 72px);
+        text-align: center;
       }
 
-      .quote-slides {
-        position: relative;
-        width: 100%;
-        height: 100%;
+      .wef-header {
+        display: grid;
+        gap: 14px;
+        justify-items: center;
       }
 
-      .quote-slide {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: min(380px, 70vw);
-        height: 190px;
-        transform: translateX(-50%);
-        transition: all 0.4s ease;
-        opacity: 0;
-      }
-
-      .quote-card {
-        height: 100%;
-        position: relative;
-        padding: 28px;
-        border-radius: 22px;
-        border: 1px solid rgba(252, 252, 252, 0.2);
-        background: linear-gradient(160deg, #212320, #060606);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-      }
-
-      .quote-card::after {
-        content: "";
-        position: absolute;
-        inset: 8px;
-        border-radius: 18px;
-        background: linear-gradient(
-          120deg,
-          transparent,
-          rgba(252, 252, 252, 0.12),
-          transparent
-        );
-        opacity: 0.55;
-        pointer-events: none;
-      }
-
-      .quote-card blockquote {
-        margin: 0 0 18px;
-        font-size: clamp(12px, 2.1vw, 16px);
-        line-height: 1.6;
-      }
-
-      .quote-card blockquote.is-long {
-        font-size: clamp(11px, 1.6vw, 14px);
-        line-height: 1.45;
-      }
-
-      .quote-meta {
-        font-size: 11px;
+      .wef-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 16px;
+        border: 1px solid rgba(252, 252, 252, 0.12);
+        border-radius: 999px;
+        font-size: 10px;
         letter-spacing: 0.24em;
         text-transform: uppercase;
         color: var(--mist);
+        background: rgba(252, 252, 252, 0.04);
       }
 
-      .quote-slide.center {
-        opacity: 1;
-        z-index: 3;
+      .wef-title {
+        margin: 0;
+        font-size: clamp(32px, 6vw, 68px);
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        line-height: 1.05;
       }
 
-      .quote-slide.left {
-        transform: translateX(-104%) scale(0.82);
-        opacity: 0.8;
-        z-index: 2;
+      .wef-sub {
+        margin: 0;
+        font-size: clamp(14px, 1.6vw, 17px);
+        color: var(--mist);
+        max-width: 560px;
+        line-height: 1.7;
       }
 
-      .quote-slide.right {
-        transform: translateX(4%) scale(0.82);
-        opacity: 0.8;
-        z-index: 2;
+      .wef-stage {
+        display: flex;
+        align-items: center;
+        gap: 16px;
       }
 
-      .quote-arrow {
+      .wef-quote-frame {
+        flex: 1;
+        min-height: 240px;
+        padding: clamp(28px, 4vw, 52px);
+        border-radius: 24px;
+        border: 1px solid rgba(252, 252, 252, 0.07);
+        background: linear-gradient(160deg, rgba(252, 252, 252, 0.04), rgba(252, 252, 252, 0.01));
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        transition: opacity 0.3s ease;
+      }
+
+      .wef-quote-frame::before {
+        content: "";
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 44px;
-        height: 44px;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(252, 252, 252, 0.03), transparent);
+        pointer-events: none;
+      }
+
+      .wef-quote-frame.is-fading {
+        opacity: 0;
+      }
+
+      .wef-deco-quote {
+        font-size: 160px;
+        line-height: 0.5;
+        color: rgba(252, 252, 252, 0.05);
+        font-family: Georgia, "Times New Roman", serif;
+        position: absolute;
+        top: 28px;
+        left: 28px;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .wef-quote-text {
+        margin: 0;
+        font-size: clamp(16px, 2.4vw, 22px);
+        line-height: 1.65;
+        font-weight: 400;
+        color: rgba(252, 252, 252, 0.88);
+        font-style: italic;
+        position: relative;
+        z-index: 1;
+      }
+
+      .wef-quote-author {
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--mist);
+        position: relative;
+        z-index: 1;
+      }
+
+      .wef-btn {
+        width: 48px;
+        height: 48px;
         border-radius: 999px;
-        border: 1px solid rgba(252, 252, 252, 0.2);
-        background: rgba(10, 10, 10, 0.85);
+        border: 1px solid rgba(252, 252, 252, 0.12);
+        background: rgba(10, 10, 10, 0.7);
         color: var(--paper);
+        cursor: pointer;
         display: grid;
         place-items: center;
-        font-size: 22px;
+        font-size: 13px;
+        flex-shrink: 0;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .wef-btn:hover {
+        border-color: rgba(252, 252, 252, 0.36);
+        box-shadow: 0 0 24px rgba(252, 252, 252, 0.08);
+        transform: scale(1.06);
+      }
+
+      .wef-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .wef-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(252, 252, 252, 0.18);
+        border: none;
+        padding: 0;
         cursor: pointer;
-        user-select: none;
-        z-index: 5;
-        transition:
-          transform 0.3s ease,
-          border-color 0.3s ease,
-          box-shadow 0.3s ease;
+        transition: background 0.3s ease, width 0.3s ease;
       }
 
-      .quote-arrow:hover {
-        border-color: var(--glow);
-        box-shadow: 0 0 24px rgba(252, 252, 252, 0.12);
-        transform: translateY(-50%) scale(1.05);
-      }
-
-      .quote-arrow.left {
-        left: -18px;
-      }
-
-      .quote-arrow.right {
-        right: -18px;
+      .wef-dot.is-active {
+        background: rgba(252, 252, 252, 0.75);
+        width: 20px;
       }
 
       .board-section {
@@ -1394,8 +1303,8 @@
       }
 
       .footer-bottom {
-        margin-top: 16px;
-        padding-bottom: 18px;
+        margin-top: 80px;
+        padding-bottom: 28px;
         text-align: center;
         text-transform: uppercase;
         font-size: 10px;
@@ -1421,6 +1330,7 @@
       .phone-media img {
         width: min(100%, 420px);
         max-height: 560px;
+        filter: none;
       }
 
       .orbit1 {
@@ -1464,23 +1374,6 @@
         background: linear-gradient(120deg, var(--veil), transparent);
         transform: rotate(20deg);
         animation: pulse 8s ease-in-out infinite;
-      }
-
-      .pulse.pos2 {
-        left: auto;
-        left: 35%;
-        top: 50%;
-        bottom: auto;
-        width: 180px;
-        height: 180px;
-        border-radius: 32px;
-        background: linear-gradient(
-          120deg,
-          rgba(252, 252, 252, 0.06),
-          transparent
-        );
-        transform: rotate(-12deg);
-        animation-duration: 10s;
       }
 
       .pulse.pos2 {
@@ -1558,29 +1451,19 @@
 
       .reveal {
         opacity: 0;
-        transform: translateY(18px);
-        animation: rise 1s ease forwards;
+        transform: translateY(22px);
+        transition: opacity 0.75s ease, transform 0.75s ease;
       }
 
-      .delay-1 {
-        animation-delay: 0.2s;
-      }
-      .delay-2 {
-        animation-delay: 0.4s;
-      }
-      .delay-3 {
-        animation-delay: 0.6s;
-      }
-      .delay-4 {
-        animation-delay: 0.8s;
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
-      @keyframes rise {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+      .delay-1 { transition-delay: 0.08s; }
+      .delay-2 { transition-delay: 0.16s; }
+      .delay-3 { transition-delay: 0.22s; }
+      .delay-4 { transition-delay: 0.3s; }
 
       @keyframes float {
         0%,
@@ -1630,12 +1513,9 @@
           transform: translateX(-64px);
         }
 
-        .quote-arrow.left {
-          left: -24px;
-        }
-
-        .quote-arrow.right {
-          right: -24px;
+        .wef-btn {
+          width: 44px;
+          height: 44px;
         }
       }
 
@@ -1675,14 +1555,8 @@
           transform: none;
         }
 
-        .quote-layout {
-          grid-template-columns: 1fr;
-          gap: 28px;
-        }
-
-        .quote-copy {
-          max-width: 100%;
-          justify-self: start;
+        .wef-title {
+          font-size: clamp(28px, 5vw, 52px);
         }
 
         .board-section {
@@ -1903,78 +1777,23 @@
           gap: 10px;
         }
 
-        .quote-section {
-          padding: 48px 0 24px;
-          gap: 18px;
+        .wef-section {
+          padding: 56px 20px 48px;
         }
 
-        .quote-layout {
-          gap: 20px;
-          padding-left: 0;
+        .wef-stage {
+          gap: 10px;
         }
 
-        .quote-carousel {
-          height: 240px;
-          padding-bottom: 48px;
-          width: 100%;
-          max-width: 420px;
-          margin: 0 auto;
-          margin-left: 0;
-        }
-
-        .quote-slides {
-          height: 100%;
-        }
-
-        .quote-slide {
-          position: absolute;
-          left: 0;
-          width: 100%;
-          height: auto;
-          transform: none;
-        }
-
-        .quote-slide.center {
-          position: absolute;
-        }
-
-        .quote-slide.left,
-        .quote-slide.right {
-          opacity: 0;
-        }
-
-        .quote-card {
-          padding: 22px;
-        }
-
-        .quote-card blockquote {
-          font-size: 15px;
-        }
-
-        .quote-arrow {
-          top: auto;
-          bottom: 0;
-          transform: none;
+        .wef-btn {
           width: 40px;
           height: 40px;
-          font-size: 18px;
-          touch-action: manipulation;
+          font-size: 12px;
         }
 
-        .quote-arrow.left {
-          left: 12px;
-        }
-
-        .quote-arrow.right {
-          right: 12px;
-        }
-
-        .quote-copy {
-          order: 1;
-        }
-
-        .quote-carousel {
-          order: 2;
+        .wef-quote-frame {
+          min-height: 200px;
+          padding: 24px 20px;
         }
 
         .orbit1,
@@ -2060,11 +1879,6 @@
           letter-spacing: 0.14em;
         }
 
-        .quote-section h2 {
-          font-size: 16px;
-          letter-spacing: 0.14em;
-        }
-
         .footer-title {
           letter-spacing: 0.2em;
         }
@@ -2082,8 +1896,618 @@
           letter-spacing: 0.1em;
         }
 
-        .quote-card {
-          padding: 18px;
+        .wef-btn {
+          width: 36px;
+          height: 36px;
+        }
+      }
+
+      /* ─── Sticky showcase cards ─── */
+      .showcase-scroll-outer {
+        position: relative;
+        height: calc(100vh + 1200px);
+      }
+
+      .showcase-scroll-sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+
+      .showcase-scroll-sticky .showcase {
+        padding: clamp(20px, 4vw, 48px) 0;
+        width: 100%;
+      }
+
+      .scroll-cards {
+        display: grid;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .scroll-card {
+        border-radius: 16px;
+        border: 1px solid rgba(252, 252, 252, 0.1);
+        padding: 18px 22px;
+        background: rgba(252, 252, 252, 0.02);
+        transition: border-color 0.55s cubic-bezier(0.22, 1, 0.36, 1), background 0.55s ease, box-shadow 0.55s ease;
+        overflow: hidden;
+      }
+
+      .scroll-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .scroll-card h3 {
+        margin: 0;
+        font-size: 13px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: rgba(252, 252, 252, 0.45);
+        transition: color 0.5s ease;
+      }
+
+      .scroll-card-tag {
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(252, 252, 252, 0.3);
+        transition: color 0.5s ease;
+        flex-shrink: 0;
+      }
+
+      .scroll-card-body {
+        font-size: 14px;
+        line-height: 1.65;
+        color: rgba(252, 252, 252, 0.74);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        margin-top: 0;
+        transition: max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease, margin-top 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .scroll-card.is-scroll-active {
+        border-color: rgba(252, 252, 252, 0.28);
+        background: linear-gradient(150deg, rgba(252, 252, 252, 0.08), rgba(252, 252, 252, 0.02));
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      .scroll-card.is-scroll-active h3 {
+        color: rgba(252, 252, 252, 0.92);
+      }
+
+      .scroll-card.is-scroll-active .scroll-card-tag {
+        color: rgba(252, 252, 252, 0.6);
+      }
+
+      .scroll-card.is-scroll-active .scroll-card-body {
+        max-height: 200px;
+        opacity: 1;
+        margin-top: 14px;
+      }
+
+      /* ─── New Founder Board ─── */
+      .board-stats-row {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        padding: 28px 0 20px;
+      }
+
+      .board-stat-big {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        min-width: 72px;
+      }
+
+      .board-stat-right {
+        text-align: right;
+      }
+
+      .board-stat-num {
+        font-size: clamp(28px, 4vw, 42px);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        line-height: 1;
+        color: var(--paper);
+      }
+
+      .board-stat-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: var(--mist);
+      }
+
+      .board-progress-wrap {
+        flex: 1;
+        display: grid;
+        gap: 9px;
+      }
+
+      .board-progress-bar {
+        height: 5px;
+        border-radius: 999px;
+        background: rgba(252, 252, 252, 0.08);
+        overflow: hidden;
+      }
+
+      .board-progress-fill {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(64, 214, 140, 0.6), rgba(64, 214, 140, 0.9));
+        width: 0%;
+        transition: width 1.4s ease;
+      }
+
+      .board-progress-label {
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--mist);
+        text-align: center;
+      }
+
+      .board-grid-wrap {
+        border-radius: 22px;
+        padding: 22px;
+        background: rgba(252, 252, 252, 0.025);
+        border: 1px solid rgba(252, 252, 252, 0.08);
+        overflow: hidden;
+      }
+
+      .board-grid-static {
+        display: grid;
+        grid-template-columns: repeat(40, 1fr);
+        gap: 4px;
+      }
+
+      .board-tile-static {
+        aspect-ratio: 1;
+        border-radius: 3px;
+        background: rgba(252, 252, 252, 0.06);
+        border: 1px solid rgba(252, 252, 252, 0.1);
+        transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        position: relative;
+        cursor: default;
+      }
+
+      .board-tile-static:hover {
+        background: rgba(252, 252, 252, 0.18);
+        border-color: rgba(252, 252, 252, 0.4);
+        z-index: 2;
+      }
+
+      .board-tile-static::after {
+        content: attr(data-num);
+        position: absolute;
+        bottom: calc(100% + 5px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(8, 8, 8, 0.94);
+        border: 1px solid rgba(252, 252, 252, 0.18);
+        border-radius: 6px;
+        padding: 4px 7px;
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        font-family: "Montserrat", sans-serif;
+        color: var(--paper);
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.12s ease;
+        z-index: 10;
+      }
+
+      .board-tile-static:hover::after {
+        opacity: 1;
+      }
+
+      .board-tile-static.is-sold {
+        background: rgba(64, 214, 140, 0.5);
+        border-color: rgba(64, 214, 140, 0.6);
+        box-shadow: 0 0 5px rgba(64, 214, 140, 0.2);
+      }
+
+      .board-tile-static.is-sold:hover {
+        background: rgba(64, 214, 140, 0.75);
+        border-color: rgba(64, 214, 140, 0.85);
+      }
+
+      @media (max-width: 900px) {
+        .board-grid-static {
+          grid-template-columns: repeat(32, 1fr);
+          gap: 3px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .showcase-scroll-outer {
+          height: auto;
+        }
+        .showcase-scroll-sticky {
+          position: relative;
+          top: auto;
+          height: auto;
+          display: block;
+        }
+        .scroll-card {
+          border-color: rgba(252, 252, 252, 0.14);
+          background: rgba(252, 252, 252, 0.04);
+        }
+        .scroll-card h3 {
+          color: rgba(252, 252, 252, 0.82);
+        }
+        .scroll-card-tag {
+          color: rgba(252, 252, 252, 0.5);
+        }
+        .scroll-card .scroll-card-body,
+        .scroll-card.is-scroll-active .scroll-card-body {
+          max-height: none;
+          opacity: 1;
+          margin-top: 14px;
+        }
+        .board-grid-static {
+          grid-template-columns: repeat(20, 1fr);
+          gap: 3px;
+        }
+        .board-stats-row {
+          gap: 16px;
+        }
+        .board-grid-wrap {
+          padding: 14px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .board-grid-static {
+          grid-template-columns: repeat(16, 1fr);
+          gap: 2px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .showcase-scroll-outer {
+          height: auto;
+        }
+        .showcase-scroll-sticky {
+          position: relative;
+          top: auto;
+          height: auto;
+          display: block;
+        }
+        .scroll-card .scroll-card-body {
+          max-height: none;
+          opacity: 1;
+          margin-top: 14px;
+        }
+        .scroll-card {
+          border-color: rgba(252, 252, 252, 0.14);
+          background: rgba(252, 252, 252, 0.04);
+        }
+        .scroll-card h3 {
+          color: rgba(252, 252, 252, 0.82);
+        }
+        .scroll-card-tag {
+          color: rgba(252, 252, 252, 0.5);
+        }
+      }
+
+      /* ─── AI Agent Section ─── */
+      .agent-outer {
+        position: relative;
+        height: calc(100vh + 2000px);
+      }
+
+      .agent-sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .agent-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(40px, 8vw, 100px);
+        padding: 0 clamp(24px, 6vw, 80px);
+        width: 100%;
+        align-items: center;
+      }
+
+      .agent-video-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .agent-video-wrap {
+        position: relative;
+        width: min(100%, 360px);
+        aspect-ratio: 9 / 16;
+        max-height: 78vh;
+        border-radius: 0;
+        overflow: hidden;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+      }
+
+      .agent-video-wrap canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .agent-video-wrap video {
+        display: none;
+      }
+
+      .agent-video-grad {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent 55%, rgba(9, 9, 9, 0.45));
+        pointer-events: none;
+      }
+
+      .agent-copy-col {
+        position: relative;
+        min-height: 380px;
+      }
+
+      .agent-phase {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        right: 0;
+        display: grid;
+        gap: 22px;
+        transition: opacity 0.55s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .agent-phase.is-hidden {
+        opacity: 0;
+        transform: translateY(calc(-50% + 28px));
+        pointer-events: none;
+      }
+
+      .agent-feat-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .agent-feat-list li {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        line-height: 1.5;
+        color: rgba(252, 252, 252, 0.65);
+      }
+
+      .agent-feat-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+        background: rgba(252, 252, 252, 0.05);
+        border: 1px solid rgba(252, 252, 252, 0.09);
+        display: grid;
+        place-items: center;
+        font-size: 11px;
+        flex-shrink: 0;
+        color: rgba(252, 252, 252, 0.55);
+      }
+
+      .agent-highlight {
+        color: rgba(252, 252, 252, 0.9);
+        font-style: italic;
+        font-weight: 500;
+      }
+
+      .agent-scrub-bar {
+        position: absolute;
+        bottom: -28px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: transparent;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .agent-scrub-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, rgba(252, 252, 252, 0.35), rgba(252, 252, 252, 0.65));
+        border-radius: 999px;
+        transition: width 0.08s linear;
+      }
+
+      @media (max-width: 900px) {
+        .agent-outer {
+          height: calc(100vh + 1650px);
+        }
+
+        .agent-sticky {
+          align-items: flex-start;
+          padding: 28px 0;
+          height: 100svh;
+        }
+
+        .agent-section {
+          grid-template-columns: 1fr;
+          gap: 24px;
+          padding: 0 clamp(20px, 5vw, 56px);
+          align-content: start;
+          justify-items: center;
+        }
+
+        .agent-video-col,
+        .agent-copy-col {
+          width: min(100%, 560px);
+        }
+
+        .agent-video-wrap {
+          aspect-ratio: 9 / 16;
+          max-height: 46svh;
+          width: 100%;
+        }
+
+        .agent-copy-col {
+          min-height: 420px;
+          padding-bottom: 30px;
+        }
+
+        .agent-phase {
+          top: 0;
+          transform: none;
+          gap: 18px;
+        }
+
+        .agent-phase.is-hidden {
+          transform: translateY(24px);
+        }
+
+        .agent-copy-col .showcase-title {
+          font-size: clamp(28px, 7vw, 42px);
+        }
+
+        .agent-copy-col .lead {
+          max-width: none;
+          font-size: clamp(15px, 2.6vw, 18px);
+        }
+
+        .agent-feat-list li {
+          font-size: 13px;
+          line-height: 1.45;
+        }
+
+        .agent-scrub-bar {
+          bottom: 0;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .agent-outer {
+          height: calc(100svh + 1500px);
+        }
+
+        .agent-sticky {
+          padding: 22px 0;
+        }
+
+        .agent-copy-col {
+          min-height: 460px;
+          padding-bottom: 26px;
+        }
+
+        .agent-phase {
+          gap: 16px;
+        }
+
+        .agent-video-wrap {
+          max-height: 42svh;
+          border-radius: 0;
+        }
+
+        .agent-feat-list {
+          gap: 10px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .agent-outer {
+          height: calc(100svh + 1600px);
+        }
+
+        .agent-sticky {
+          padding: 18px 0;
+        }
+
+        .agent-section {
+          gap: 20px;
+          padding: 0 16px;
+        }
+
+        .agent-video-col,
+        .agent-copy-col {
+          width: 100%;
+        }
+
+        .agent-video-wrap {
+          max-height: 38svh;
+        }
+
+        .agent-copy-col {
+          min-height: 500px;
+        }
+
+        .agent-phase {
+          gap: 14px;
+        }
+
+        .agent-feat-list li {
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        .agent-feat-icon {
+          width: 28px;
+          height: 28px;
+          font-size: 10px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .agent-outer {
+          height: auto;
+        }
+
+        .agent-sticky {
+          position: relative;
+          height: auto;
+          overflow: visible;
+        }
+
+        .agent-section {
+          grid-template-columns: 1fr;
+          padding: 60px clamp(20px, 5vw, 56px);
+        }
+
+        .agent-copy-col {
+          min-height: auto;
+        }
+
+        .agent-phase {
+          position: static;
+          transform: none;
+        }
+
+        .agent-phase.is-hidden {
+          display: none;
+        }
+
+        .agent-video-wrap {
+          aspect-ratio: 16 / 9;
+          max-height: none;
         }
       }
     </style>
@@ -2093,10 +2517,10 @@
     <div class="grain pos2" aria-hidden="true"></div>
     <header class="reveal">
       <div class="logo">
-        <img class="logo-img" src="DYNK.png" alt="DYNK logo" />
+        <img class="logo-img" src="media/images/DYNK.png" alt="DYNK logo" />
       </div>
       <nav class="nav">
-        <span>Own it , Grow it</span>
+        <span>Own it, Grow it</span>
       </nav>
     </header>
 
@@ -2106,86 +2530,76 @@
           <div class="eyebrow">The future of money</div>
           <h1>The Ultimate Digital Wallet</h1>
           
-          <p style="font-size: 18px;" class="lead">
-            DYNK is your step into the economic
-            future - it’s a Solana-powered ecosystem uniting 
-            instantaneous transactions and monetised distribution
-            seamlessly packaged into one digital ecosystem.
+          <p class="lead">
+            DYNK is your step into the economic future — a Solana-powered ecosystem uniting instantaneous transactions and monetised distribution, seamlessly packaged into one digital wallet.
           </p>
           <div class="stats">
             <div class="stat">
-              <strong><b>1</b>¢</strong>
+              <strong>1¢</strong>
               <span>Transaction fees</span>
             </div>
             <div class="stat">
-              <strong>1000</strong>
+              <strong>800</strong>
               <span>Founder Wallets</span>
             </div>
             <div class="stat">
-              <strong>9000 </strong>
+              <strong>1,300</strong>
               <span>Treasury wallets</span>
             </div>
           </div>
           <a class="cta" href="#" data-wallet-modal>Get Your Wallet →</a>
         </div>
         <div class="hero-media">
-          <img src="coin2.png" alt="DYNK coin" />
+          <img src="media/images/coin2.png" alt="DYNK coin" />
         </div>
       </section>
 
-      <section class="showcase reveal delay-4">
-        <div class="hero-media phone-media">
-          <img src="phone.png" alt="DYNK wallet on phone" />
+      <div class="showcase-scroll-outer reveal delay-4" data-showcase-scroll>
+        <div class="showcase-scroll-sticky">
+          <section class="showcase">
+            <div class="hero-media phone-media">
+              <img src="media/images/phone.png" alt="DYNK wallet on phone" />
+            </div>
+            <div class="showcase-copy">
+              <div class="showcase-kicker">NFT wallets</div>
+              <h2 class="showcase-title">The Future of Money.</h2>
+              <p class="lead no-margin">
+                World's largest distribution of wealth and governance. Portable ownership packed with rewards and monetised distribution. Security built with transactional convenience.
+              </p>
+              <div class="scroll-cards">
+                <div class="scroll-card is-scroll-active" data-showcase-step>
+                  <div class="scroll-card-header">
+                    <h3>NFTs</h3>
+                    <span class="scroll-card-tag">Wallets</span>
+                  </div>
+                  <div class="scroll-card-body">
+                    A reward-based NFT wallet creating a tradable asset, while maintaining security through non-custodial holding.
+                  </div>
+                </div>
+                <div class="scroll-card" data-showcase-step>
+                  <div class="scroll-card-header">
+                    <h3>Founder wallets</h3>
+                    <span class="scroll-card-tag">800</span>
+                  </div>
+                  <div class="scroll-card-body">
+                    The unique opportunity to be part of the DYNK founder team — acquire one of the first 800 wallets numbered 0001–0800. Founder wallets come packed with rewards, opportunities, and guarantees throughout the distribution and transactional phases. Every treasury wallet will be linked back to a specific Founder Wallet.
+                  </div>
+                </div>
+                <div class="scroll-card" data-showcase-step>
+                  <div class="scroll-card-header">
+                    <h3>Treasury wallets</h3>
+                    <span class="scroll-card-tag">1,300</span>
+                  </div>
+                  <div class="scroll-card-body">
+                    Treasury Wallets grow through rewards built into the ecosystem. A range of 1,300 wallets offer multiple entry points into the DYNK journey. Every distributed transactional wallet links back to either a Founder or Treasury Wallet.
+                  </div>
+                </div>
+              </div>
+              <a class="cta cta--sm" href="#" data-wallet-modal>Get Your Wallet →</a>
+            </div>
+          </section>
         </div>
-        <div class="showcase-copy">
-          <div class="showcase-kicker">NFT wallets</div>
-          <h2 class="showcase-title">The Future of Money.</h2>
-          <p class="lead no-margin">
-            Worlds biggest Distribution of Wealth and Governance.<br>
-
-Portable ownership packed with rewards and monetised distribution.<br>
-
-Security built with transactional convenience.
-          </p>
-          <div class="showcase-accordion" data-showcase-accordion>
-            <div class="showcase-item">
-              <button class="showcase-toggle" type="button">
-                NFTs <span>Wallets</span>
-                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-              </button>
-              <div class="showcase-panel">
-                A Reward based NFT wallet creating a tradable asset,
-                   while maintaining the security through non custodial holding
-              </div>
-            </div>
-            <div class="showcase-item">
-              <button class="showcase-toggle" type="button">
-                Founder wallets <span>1000</span>
-                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-              </button>
-              <div class="showcase-panel">
-                The unique opportunity to be part of the DYNK founder team through acquiring one of the first wallets numbered from 0001-1000.
-Founder wallets come packed with rewards and opportunities and guarantees throughout the distribution and transactional phases.
-Every treasury wallet will be linked back to a specific Founder Wallet
-              </div>
-            </div>
-            <div class="showcase-item">
-              <button class="showcase-toggle" type="button">
-                Treasury wallets <span>9000</span>
-                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-              </button>
-              <div class="showcase-panel">
-                Treasury Wallets will have the opportunity to grow their wallet and be part of the treasury ecosystem through rewards that are packed into their wallet.
-A range of Treasury Wallets numbered 1001-10,000 are available giving multiple entry points to be part of the DYNK journey 
-Every distributed transactional wallet will be linked to either a founder wallet of a treasury wallet 
-              </div>
-            </div>
-          </div>
-          <a class="cta" style="margin-top: 10px; padding-top: 0; padding-bottom: 0; text-indent: 6px;" href="#" data-wallet-modal
-            >Get Your Wallet →</a
-          >
-        </div>
-      </section>
+      </div>
 
       <section class="circle-section reveal delay-2">
         <div class="circle-copy">
@@ -2195,7 +2609,7 @@ Every distributed transactional wallet will be linked to either a founder wallet
           </h2>
           <p class="lead">
             
-            Dynk is inevitable. <br> Be apart of the story , or read about it later.
+            Dynk is inevitable — be a part of the story, or read about it later.
           <div class="circle-list">
             <div class="circle-card">
               <h3>Transactions</h3>
@@ -2245,7 +2659,7 @@ Every distributed transactional wallet will be linked to either a founder wallet
           <div class="circle-center">
             <div class="circle-flip" id="circleFlip">
               <div class="circle-face front">
-                <img src="darkCoin.png" alt="Dynk logo" />
+                <img src="media/images/darkCoin.png" alt="Dynk logo" />
               </div>
               <div class="circle-face back">
                 <div class="circle-back" id="circleBack">
@@ -2384,63 +2798,115 @@ Every distributed transactional wallet will be linked to either a founder wallet
         </div>
         <div class="circle-mobile-hint">Click on each to see more info</div>
       </section>
-      <section class="quote-section reveal delay-3">
-        <div class="quote-layout">
-          <div class="quote-carousel" data-quote-carousel>
-            <button
-              class="quote-arrow left"
-              data-quote-prev
-              aria-label="Previous"
-              type="button"
-            >
-              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-            </button>
-            <button
-              class="quote-arrow right"
-              data-quote-next
-              aria-label="Next"
-              type="button"
-            >
-              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </button>
-            <div class="quote-slides" data-quote-slides></div>
-          </div>
-          <div class="quote-copy">
+      <!-- AI Agent scroll-scrub section -->
+      <div class="agent-outer reveal delay-2" data-agent-scroll>
+        <div class="agent-sticky">
+          <section class="agent-section">
+            <div class="agent-video-col">
+              <div class="agent-video-wrap">
+                <canvas id="agentCanvas" aria-hidden="true"></canvas>
+                <div class="agent-video-grad"></div>
+              </div>
+            </div>
+            <div class="agent-copy-col">
+              <div class="agent-phase" id="agentPhase1">
+                <div class="showcase-kicker">AI in your pocket</div>
+                <h2 class="showcase-title">Introducing your AI agent.</h2>
+                <p class="lead no-margin">Your personal AI agent lives directly on your local device, acting first as a guard for your private data. Nothing needs to leave your wallet unless you allow it, so your information stays protected, personal, and under your control.</p>
+                <ul class="agent-feat-list">
+                  <li><span class="agent-feat-icon"><i class="fas fa-mobile-screen-button" aria-hidden="true"></i></span>Runs locally on your device</li>
+                  <li><span class="agent-feat-icon"><i class="fas fa-user-shield" aria-hidden="true"></i></span>Protects your personal data by default</li>
+                  <li><span class="agent-feat-icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></span>Only shares or acts when you give permission</li>
+                </ul>
+              </div>
+              <div class="agent-phase is-hidden" id="agentPhase2">
+                <div class="showcase-kicker">Data sovereignty</div>
+                <h2 class="showcase-title">Get Paid for your Data</h2>
+                <p class="lead no-margin">You decide exactly what data to release. Your AI agent then uses only that approved information to connect directly with merchants, and you get paid when they market directly to you</p>
+                <ul class="agent-feat-list">
+                  <li><span class="agent-feat-icon"><i class="fas fa-user-shield" aria-hidden="true"></i></span>You choose exactly what data is shared</li>
+                  <li><span class="agent-feat-icon"><i class="fas fa-store" aria-hidden="true"></i></span>Your agent connects directly with merchants</li>
+                  <li><span class="agent-feat-icon"><i class="fas fa-coins" aria-hidden="true"></i></span>You get rewarded when your data creates value</li>
+                </ul>
+              </div>
+              <div class="agent-scrub-bar">
+                <div class="agent-scrub-fill" id="agentProgressFill"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- WEF Section -->
+      <section class="wef-section reveal delay-3">
+        <div class="wef-inner">
+          <div class="wef-header">
+            <div class="wef-badge">
+              <i class="fas fa-landmark" aria-hidden="true"></i>
+              <span>WEF Davos 2026</span>
+            </div>
             <div class="showcase-kicker">Signal from the room</div>
-            <h2 class="showcase-title">World Economic Forum on Crypto</h2>
-            <p class="lead no-margin">
-              The world is now awoken, as evidenced by the commentary at the world economic forum 2026. 
-            </p>
+            <h2 class="wef-title">World Economic Forum<br>on Crypto</h2>
+            <p class="wef-sub">The world is now awoken, as evidenced by the commentary at the world economic forum 2026.</p>
           </div>
+          <div class="wef-stage">
+            <button class="wef-btn" id="wefPrev" type="button" aria-label="Previous quote">
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <div class="wef-quote-frame" id="wefFrame">
+              <div class="wef-deco-quote" aria-hidden="true">"</div>
+              <blockquote class="wef-quote-text" id="wefText"></blockquote>
+              <div class="wef-quote-author" id="wefAuthor"></div>
+            </div>
+            <button class="wef-btn" id="wefNext" type="button" aria-label="Next quote">
+              <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="wef-dots" id="wefDots" role="tablist"></div>
         </div>
       </section>
 
       <section class="board-section reveal delay-3">
         <div class="board-header">
-          <div class="showcase-kicker">Founder wallets sold</div>
+          <div class="showcase-kicker">Founder wallets</div>
           <h2 class="showcase-title">Founder Wallet Board</h2>
           <p class="lead no-margin">
-           View who has bought founder wallets
+            Track the 800 Founder Wallets as they are claimed.
           </p>
-          <div class="board-legend">
-            <div class="board-legend-item">
-              <span class="board-legend-swatch"></span> Untaken
+        </div>
+
+        <div class="board-stats-row">
+          <div class="board-stat-big">
+            <span class="board-stat-num" id="boardSoldCount">—</span>
+            <span class="board-stat-label">Claimed</span>
+          </div>
+          <div class="board-progress-wrap">
+            <div class="board-progress-bar">
+              <div class="board-progress-fill" id="boardProgressFill"></div>
             </div>
-            <div class="board-legend-item">
-              <span class="board-legend-swatch sold"></span> Sold
-            </div>
+            <div class="board-progress-label" id="boardProgressLabel"></div>
+          </div>
+          <div class="board-stat-big board-stat-right">
+            <span class="board-stat-num" id="boardAvailCount">—</span>
+            <span class="board-stat-label">Available</span>
           </div>
         </div>
-        <div class="board-shell is-locked" data-board-shell>
-          <div class="board-viewport" data-board-viewport>
-            <div class="board-canvas" data-board-canvas>
-              <div class="board-grid" data-board-grid></div>
-            </div>
+
+        <div class="board-grid-wrap">
+          <div class="board-grid-static" id="boardGridStatic"></div>
+        </div>
+
+        <div class="board-legend">
+          <div class="board-legend-item">
+            <span class="board-legend-swatch"></span> Available
+          </div>
+          <div class="board-legend-item">
+            <span class="board-legend-swatch sold"></span> Claimed
           </div>
         </div>
       </section>
 
-      <div class="divider" style="margin-top: 0;"></div>
+      <div class="divider"></div>
 
       <footer>
         <div class="footer-col">
@@ -2462,7 +2928,7 @@ Every distributed transactional wallet will be linked to either a founder wallet
           <span>Global Operations</span>
         </div>
       </footer>
-      <div style="margin-top: 100px; padding-bottom: 25px;" class="footer-bottom">© 2026 Dynk</div>
+      <div class="footer-bottom">© 2026 Dynk</div>
     </main>
 
     <div class="orbit1" aria-hidden="true"></div>
@@ -2549,14 +3015,13 @@ Every distributed transactional wallet will be linked to either a founder wallet
         <div class="modal-kicker">Founder wallets</div>
         <h3 id="walletModalTitle">Applications Now Open</h3>
         <p>
-          We are currently taking applications to buy Founder Wallets. If you want to be apart the future, send us an email at contact@dynk.io.
+          We are currently taking applications to acquire Founder Wallets. If you want to be a part of the future, reach us at contact@dynk.io.
         </p>
         <a class="modal-email" href="mailto:contact@dynk.io">
           contact@dynk.io
         </a>
       </div>
     </div>
-    </section>
     <script src="main.js"></script>
   </body>
 </html>
