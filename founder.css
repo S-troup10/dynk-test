@@ -2,7 +2,11 @@
    DYNK — Founder Wallets Page
    ════════════════════════════════════════════ */
 
-/* ─── Nav back link ─── */
+/* ─── Nav back link — always visible even when .nav is hidden on mobile ─── */
+.nav {
+  display: flex !important;
+}
+
 .fw-nav-back {
   display: flex;
   align-items: center;
@@ -185,17 +189,21 @@
   .fw-hero {
     flex-direction: column;
     min-height: auto;
-    padding-top: 72px;
+    padding-top: 56px;
+    padding-bottom: 48px;
     align-items: flex-start;
   }
   .fw-hero-coin {
-    width: clamp(240px, 72vw, 400px);
+    width: clamp(220px, 64vw, 400px);
     height: auto;
     aspect-ratio: 1;
     align-self: center;
   }
   .fw-coin-img {
-    width: 95%;
+    width: 90%;
+  }
+  .fw-hero-content {
+    max-width: 100%;
   }
 }
 
@@ -692,9 +700,12 @@
 .delay-2 { transition-delay: 0.2s; }
 
 /* ─── Founder page layout overrides ─── */
-/* Collapse the 130px grid gap inherited from styles.css main */
+/* Collapse the 130px grid gap and remove main's horizontal padding
+   (founder sections carry their own horizontal padding) */
 main {
   gap: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* Footer lives outside main — give it proper horizontal padding */
@@ -1120,9 +1131,64 @@ footer {
 
 @media (max-width: 860px) {
   .fw-contact-inner { grid-template-columns: 1fr; }
+  /* Commitment: show heading before list when stacked */
+  .fw-commitment-copy { order: 1; }
+  .fw-commit-list     { order: 2; }
 }
 
 @media (max-width: 560px) {
   .fw-form-row { grid-template-columns: 1fr; }
   .fw-reveal-kicker { margin-bottom: 32px; }
+
+  /* Hero */
+  .fw-hero-h1 {
+    font-size: clamp(36px, 10vw, 52px);
+    margin-bottom: 16px;
+  }
+  .fw-hero-lead { margin-bottom: 24px; }
+  .fw-hero-stats {
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .fw-stat-divider { height: 28px; }
+
+  /* Board */
+  .fw-board { padding-left: 16px; padding-right: 16px; }
+  .fw-selected-callout-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+  }
+
+  /* About */
+  .fw-about { padding-left: 16px; padding-right: 16px; }
+
+  /* Economics */
+  .fw-economics { padding-left: 16px; padding-right: 16px; }
+  .fw-econ-card { padding: 28px 20px; }
+
+  /* Benefits */
+  .fw-benefits-section { padding-left: 16px; padding-right: 16px; }
+  .fw-benefit-card { padding: 28px 20px; }
+  .fw-benefit-num { margin-bottom: 14px; }
+  .fw-benefit-icon-wrap { margin-bottom: 14px; }
+
+  /* Commitment */
+  .fw-commitment { padding-left: 16px; padding-right: 16px; }
+
+  /* Purchase */
+  .fw-purchase { padding-left: 16px; padding-right: 16px; }
+  .fw-price-card-top { padding: 28px 22px 22px; }
+  .fw-price-card-list { padding: 20px 22px; }
+  .fw-price-scarcity { padding: 14px 22px; }
+  .fw-price-big { font-size: clamp(44px, 12vw, 64px); }
+
+  /* Contact */
+  .fw-contact-section { padding-left: 16px; padding-right: 16px; }
+
+  /* Footer */
+  .divider { margin-left: 16px; margin-right: 16px; }
+  footer { padding-left: 16px; padding-right: 16px; }
+  .footer-bottom { padding-left: 16px; padding-right: 16px; }
 }
