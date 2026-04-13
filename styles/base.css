@@ -1,0 +1,169 @@
+/* ============================================================
+   BASE.CSS
+   Reset, custom properties, typography, global utilities,
+   keyframe animations, and scroll-reveal helpers.
+   ============================================================ */
+
+
+/* ── CUSTOM PROPERTIES ──────────────────────────────────────── */
+:root {
+  --ink:        rgba(5, 5, 5, 1);
+  --paper:      rgba(252, 252, 252, 1);
+  --veil:       rgba(252, 252, 252, 0.08);
+  --mist:       rgba(252, 252, 252, 0.28);
+  --glow:       rgba(252, 252, 252, 0.7);
+  --pulse:      rgba(252, 252, 252, 0.45);
+  --ember:      rgba(255, 128, 0, 0.18);
+  --ember-soft: rgba(255, 128, 0, 0.08);
+}
+
+
+/* ── RESET ──────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  color: var(--paper);
+  background: #090909;
+  min-height: 100vh;
+  letter-spacing: 0.01em;
+  overflow-x: clip;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+
+/* ── GRAIN OVERLAY ──────────────────────────────────────────── */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+  z-index: 1;
+}
+
+.grain.pos2 {
+  opacity: 0.6;
+  transform: translateY(1000px);
+}
+
+
+/* ── GLOBAL UTILITIES ───────────────────────────────────────── */
+.no-margin {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* ── TYPOGRAPHY ─────────────────────────────────────────────── */
+h1 {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(40px, 7vw, 82px);
+  font-weight: 700;
+  line-height: 1.03;
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: var(--mist);
+}
+
+.lead {
+  max-width: 520px;
+  font-size: clamp(16px, 2.2vw, 20px);
+  line-height: 1.6;
+  color: var(--mist);
+}
+
+p.lead {
+  margin: 0;
+}
+
+/* Shared kicker / section label style */
+.showcase-kicker {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: var(--mist);
+}
+
+/* Shared large section heading */
+.showcase-title {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+
+/* ── REVEAL ON SCROLL ───────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.1s;  }
+.delay-2 { transition-delay: 0.2s;  }
+.delay-3 { transition-delay: 0.32s; }
+.delay-4 { transition-delay: 0.46s; }
+
+
+/* ── KEYFRAME ANIMATIONS ────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-18px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: translateY(0) rotate(20deg); }
+  50%       { opacity: 0.7; transform: translateY(-8px) rotate(20deg); }
+}
+
+@keyframes ftbSpin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ── RESPONSIVE: TYPOGRAPHY ─────────────────────────────────── */
+@media (max-width: 520px) {
+  h1 {
+    font-size: clamp(30px, 10vw, 44px);
+  }
+
+  .eyebrow,
+  .circle-sub,
+  .showcase-kicker {
+    letter-spacing: 0.24em;
+  }
+}

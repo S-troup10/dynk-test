@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>Founder Wallets — DYNK</title>
+    <link rel="icon" type="image/png" href="media/images/icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="founder.css" />
+  </head>
+  <body>
+
+    <!-- ── WALLET REVEAL OVERLAY ── -->
+    <div class="fw-reveal-overlay" id="fwRevealOverlay" style="display:none" aria-live="assertive">
+      <div class="fw-reveal-content">
+        <p class="fw-reveal-kicker" id="fwRevealKicker">Securing your position</p>
+        <div class="fw-reveal-wallet-row">
+          <span class="fw-reveal-hash">#</span><span class="fw-reveal-number" id="fwRevealNumber">0000</span>
+        </div>
+        <p class="fw-reveal-sub">Founder Wallet</p>
+        <p class="fw-reveal-confirm" id="fwRevealConfirm" style="opacity:0">
+          <i class="fas fa-check" aria-hidden="true"></i>&ensp;Confirmed
+        </p>
+      </div>
+    </div>
+
+    <!-- Sticky selection bar — visible once a wallet is chosen -->
+    <div class="fw-selection-bar" id="fwSelectionBar" aria-live="polite">
+      <div class="fw-selection-inner">
+        <span class="fw-selection-label">
+          <i class="fas fa-check-circle" aria-hidden="true"></i>
+          <span id="fwSelectionText">Wallet selected</span>
+        </span>
+        <a class="fw-selection-cta" id="fwSelectionCta" href="#fw-purchase">View purchase details →</a>
+      </div>
+    </div>
+
+    <header class="reveal">
+      <div class="logo">
+        <a href="index.html">
+          <img class="logo-img" src="media/images/DYNK.png" alt="DYNK logo" />
+        </a>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="fw-nav-back">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Back
+        </a>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- ── HERO ── -->
+      <section class="fw-hero">
+        <div class="fw-hero-content reveal delay-1">
+          <div class="eyebrow">The Founding 800</div>
+          <h1 class="fw-hero-h1" id="fwHeroTitle">Own the<br>Foundation.</h1>
+          <p class="fw-hero-lead">800 exclusive positions. Numbered 0001–0800. Be part of the founding team that builds the future of money — with permanent rewards, governance rights, and ownership built in from day one.</p>
+          <div class="fw-hero-stats">
+            <div class="fw-stat">
+              <strong id="fwSoldCount">—</strong>
+              <span>Claimed</span>
+            </div>
+            <div class="fw-stat-divider" aria-hidden="true"></div>
+            <div class="fw-stat">
+              <strong id="fwAvailCount">—</strong>
+              <span>Available</span>
+            </div>
+            <div class="fw-stat-divider" aria-hidden="true"></div>
+            <div class="fw-stat">
+              <strong>$10,000</strong>
+              <span>Per wallet</span>
+            </div>
+          </div>
+          <a class="cta" href="#fw-board">Select Your Wallet ↓</a>
+        </div>
+        <div class="fw-hero-coin reveal delay-2" aria-hidden="true">
+          <img src="media/images/founder wallet.png" alt="Founder Wallet" class="fw-coin-img" />
+        </div>
+      </section>
+
+      <!-- ── BOARD ── -->
+      <section class="fw-board" id="fw-board">
+        <div class="fw-board-inner reveal">
+          <div class="fw-board-header">
+            <div>
+              <div class="eyebrow">Select a wallet</div>
+              <h2 class="fw-section-title">Founder Wallet Board</h2>
+              <p class="fw-section-sub">Click any available wallet to select it. Green tiles are already claimed.</p>
+            </div>
+            <div class="fw-board-progress-col">
+              <div class="fw-progress-row">
+                <div class="fw-progress-bar">
+                  <div class="fw-progress-fill" id="fwProgressFill"></div>
+                </div>
+                <span class="fw-progress-label" id="fwProgressLabel"></span>
+              </div>
+              <div class="fw-legend">
+                <span class="fw-legend-item"><span class="fw-legend-dot"></span> Available</span>
+                <span class="fw-legend-item"><span class="fw-legend-dot fw-legend-dot--sold"></span> Claimed</span>
+                <span class="fw-legend-item"><span class="fw-legend-dot fw-legend-dot--selected"></span> Selected</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="fw-grid board-grid-static" id="fwGrid"></div>
+
+          <!-- Selected wallet callout -->
+          <div class="fw-selected-callout" id="fwSelectedCallout" aria-live="polite">
+            <div class="fw-selected-callout-inner">
+              <div class="fw-selected-info">
+                <span class="fw-selected-num" id="fwSelectedNum">—</span>
+                <span class="fw-selected-status">Available · Ready to acquire</span>
+              </div>
+              <a class="cta cta--sm" id="fwCalloutCta" href="#fw-contact">Book a call →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── WHAT IS ── -->
+      <section class="fw-about reveal">
+        <div class="fw-about-inner">
+          <div class="fw-about-statement">
+            <img src="media/images/founder page.png" alt="Founder Wallet visual" class="fw-about-image" />
+          </div>
+          <div class="fw-about-body">
+            <div class="eyebrow">What is a Founder Wallet?</div>
+            <p>A Founder Wallet makes you a founder in the DYNK ecosystem. Numbered 0001–0800, each wallet is a unique on-chain NFT that permanently records your place in the founding network.</p>
+            <p>Founder Wallets sit at the top of the DYNK structure. Transaction fees generated across the network are distributed among eligible founders, creating a direct link between network activity and founder rewards.</p>
+            <p>When you hold a Founder Wallet and maintain a balance of 10,000 DYNK or more, you remain eligible for your share of transaction fees and for rewards across three levels of referrals. You are not just a customer. You are part of the foundation of the ecosystem.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── ECONOMICS ── -->
+      <section class="fw-economics reveal">
+        <div class="fw-economics-inner">
+          <div class="fw-econ-header">
+            <div class="eyebrow">The Opportunity</div>
+            <h2 class="fw-section-title">The numbers behind<br>a Founder Wallet.</h2>
+          </div>
+          <div class="fw-econ-grid">
+
+            <div class="fw-econ-card">
+              <div class="fw-econ-num">1¢</div>
+              <div class="fw-econ-label">Per Transaction</div>
+              <p>Every transaction on the DYNK network is capped at one cent — the most competitive rate in the market, and every cent is distributed across the ecosystem.</p>
+            </div>
+            <div class="fw-econ-card">
+              <div class="fw-econ-num">Forever</div>
+              <div class="fw-econ-label">Revenue Share</div>
+              <p>Your revenue share has no expiry. No vesting cliff. No lock-up period. Once you hold a Founder Wallet, you earn for the lifetime of the network.</p>
+            </div>
+            <div class="fw-econ-card">
+              <div class="fw-econ-num">800</div>
+              <div class="fw-econ-label">Ever Issued</div>
+              <p>There will never be more than 800 Founder Wallets. The supply is fixed on-chain at genesis. Scarcity is guaranteed by the protocol, not a promise.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── BENEFITS ── -->
+ <section class="fw-benefits-section reveal">
+        <div class="fw-benefits-inner">
+          <div class="fw-benefits-header">
+            <div class="eyebrow">What you get</div>
+            <h2 class="fw-section-title">Every Founder Wallet<br>Makes you Apart of</h2>
+          </div>
+          <div class="fw-benefits-grid">
+            <div class="fw-benefit-card">
+              <div class="fw-benefit-num">01</div>
+              <div class="fw-benefit-icon-wrap">
+                <i class="fas fa-chart-line" aria-hidden="true"></i>
+              </div>
+              <h3>Transaction Revenue Share</h3>
+              <p>Every transaction across the DYNK network generates fees. Founder Wallets receive a proportional share of all network transaction revenue — permanently and automatically.</p>
+            </div>
+            <div class="fw-benefit-card">
+              <div class="fw-benefit-num">02</div>
+              <div class="fw-benefit-icon-wrap">
+                <i class="fas fa-sitemap" aria-hidden="true"></i>
+              </div>
+              <h3>Enhanced Referals</h3>
+              <p>Active founder members gain access to 3 levels of referals , which expoentially increases the yield potenial from each direct referal</p>
+            </div>
+            <div class="fw-benefit-card">
+              <div class="fw-benefit-num">03</div>
+              <div class="fw-benefit-icon-wrap">
+                <i class="fas fa-landmark" aria-hidden="true"></i>
+              </div>
+              <h3>Governance Rights</h3>
+              <p>Founder Wallet holders vote on key decisions and actively shape the direction of the DYNK protocol. You are not just a holder — you are a governor of the infrastructure.</p>
+            </div>
+            <div class="fw-benefit-card">
+              <div class="fw-benefit-num">04</div>
+              <div class="fw-benefit-icon-wrap">
+                <i class="fas fa-gem" aria-hidden="true"></i>
+              </div>
+              <h3>NFT Tradability</h3>
+              <p>Your Founder Wallet is a fully tradable NFT. Its value appreciates with the growth of the network. As DYNK scales, the 800 founding positions become increasingly valuable and scarce.</p>
+            </div>
+            <div class="fw-benefit-card">
+              <div class="fw-benefit-num">05</div>
+              <div class="fw-benefit-icon-wrap">
+                <i class="fas fa-bolt" aria-hidden="true"></i>
+              </div>
+              <h3>Dynk Card</h3>
+              <p>As apart of the founder package , founders recive a dynk card which serves as a phyiscial key to your digital assets </p>
+            </div>
+            <div class="fw-benefit-card">
+              <div class="fw-benefit-num">06</div>
+              <div class="fw-benefit-icon-wrap">
+                <i class="fas fa-shield-halved" aria-hidden="true"></i>
+              </div>
+              <h3>Lifetime Guarantee</h3>
+              <p>Founder Wallet status and all benefits are guaranteed for the lifetime of the DYNK protocol. No expiry. No conditions. No renegotiation. Permanent, immutable, on-chain.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── COMMITMENT ── -->
+      <section class="fw-commitment reveal">
+        <div class="fw-commitment-inner">
+          <div class="fw-commitment-copy">
+            <div class="eyebrow">Our commitment</div>
+            <h2 class="fw-section-title">What Dynk commits<br>to every founder.</h2>
+            <p class="fw-commitment-sub">These are not marketing promises. They are protocol-level commitments, enforced on-chain from day one.</p>
+          </div>
+          <ul class="fw-commit-list">
+            <li>
+              <i class="fas fa-check" aria-hidden="true"></i>
+              <span>Fixed supply of 800 Founder Wallets — never increased, ever</span>
+            </li>
+            <li>
+              <i class="fas fa-check" aria-hidden="true"></i>
+              <span>Revenue share distributed automatically, with no intermediaries</span>
+            </li>
+            <li>
+              <i class="fas fa-check" aria-hidden="true"></i>
+              <span>Full non-custodial ownership — your wallet, your keys, always</span>
+            </li>
+            <li>
+              <i class="fas fa-check" aria-hidden="true"></i>
+              <span>Governance voting rights active from the moment of acquisition</span>
+            </li>
+            <li>
+              <i class="fas fa-check" aria-hidden="true"></i>
+              <span>NFT is freely tradable on any compatible marketplace at any time</span>
+            </li>
+
+            <li>
+              <i class="fas fa-check" aria-hidden="true"></i>
+              <span>Permanent numbered identity — your wallet number is yours forever</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ── PURCHASE ── -->
+      <section class="fw-purchase" id="fw-purchase">
+        <div class="fw-purchase-inner reveal">
+          <div class="fw-purchase-left">
+            <div class="eyebrow">Acquire your position</div>
+            <h2 class="fw-section-title" id="fwPurchaseTitle">Secure Your<br>Founder Wallet.</h2>
+            <p class="fw-purchase-sub" id="fwCtaDesc">Applications are currently open. Reach out to acquire your Founder Wallet and secure your place in the founding 800.</p>
+            <a class="cta fw-purchase-cta" id="fwCtaBtn" href="#fw-contact">Apply to Purchase →</a>
+            <p class="fw-contact-note">
+              Questions? Email us at <a href="mailto:simon@dynk.io">simon@dynk.io</a>
+            </p>
+          </div>
+          <div class="fw-purchase-right">
+            <div class="fw-price-card">
+              <div class="fw-price-card-top">
+                <span class="fw-price-eyebrow">Acquisition price</span>
+                <div class="fw-price-big">$10,000</div>
+                <span class="fw-price-sub">One-time · Lifetime benefits</span>
+              </div>
+              <div class="fw-price-card-list">
+                <div class="fw-price-item">
+                  <i class="fas fa-infinity" aria-hidden="true"></i>
+                  <span>Permanent revenue share</span>
+                </div>
+                <div class="fw-price-item">
+                  <i class="fas fa-sitemap" aria-hidden="true"></i>
+                  <span>Treasury network access</span>
+                </div>
+                <div class="fw-price-item">
+                  <i class="fas fa-landmark" aria-hidden="true"></i>
+                  <span>Governance voting rights</span>
+                </div>
+                <div class="fw-price-item">
+                  <i class="fas fa-gem" aria-hidden="true"></i>
+                  <span>Tradable NFT asset</span>
+                </div>
+                <div class="fw-price-item">
+                  <i class="fas fa-bolt" aria-hidden="true"></i>
+                  <span>Lifetime priority access</span>
+                </div>
+              </div>
+              <div class="fw-price-scarcity">
+                <span class="fw-scarcity-dot" aria-hidden="true"></span>
+                <span id="fwScarcityText">779 wallets remaining</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CONTACT / BOOK A CALL ── -->
+      <section class="fw-contact-section reveal" id="fw-contact">
+        <div class="fw-contact-inner">
+          <div class="fw-contact-copy">
+            <div class="eyebrow">Arrange a call</div>
+            <h2 class="fw-section-title">Schedule a call.<br>Secure your position.</h2>
+            <p class="fw-contact-lead">Share your details and we'll reach out to arrange a call at your convenience. No pressure — just a conversation about the opportunity.</p>
+            <ul class="fw-contact-promises">
+              <li><i class="fas fa-check" aria-hidden="true"></i> No commitment required</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> We'll call at your convenience</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Your information stays private</li>
+            </ul>
+          </div>
+
+          <div class="fw-form-wrap" id="fwFormWrap">
+
+            <form class="fw-form" id="fwContactForm" novalidate>
+              <div class="fw-form-row">
+                <div class="fw-form-group">
+                  <label class="fw-form-label" for="fwFormName">Name</label>
+                  <input class="fw-form-input" type="text" id="fwFormName" name="name" placeholder="Your full name" required />
+                </div>
+                <div class="fw-form-group">
+                  <label class="fw-form-label" for="fwFormEmail">Email</label>
+                  <input class="fw-form-input" type="email" id="fwFormEmail" name="email" placeholder="you@example.com" required />
+                </div>
+              </div>
+
+              <div class="fw-form-row">
+                <div class="fw-form-group">
+                  <label class="fw-form-label" for="fwFormPhone">Phone <span class="fw-form-optional">optional</span></label>
+                  <input class="fw-form-input" type="tel" id="fwFormPhone" name="phone" placeholder="+1 234 567 8900" />
+                </div>
+                <div class="fw-form-group">
+                  <label class="fw-form-label" for="fwFormWallet">Selected Wallet</label>
+                  <input class="fw-form-input fw-form-input--muted" type="text" id="fwFormWallet" name="wallet" placeholder="Select a wallet above ↑" readonly />
+                </div>
+              </div>
+
+              <div class="fw-form-group">
+                <label class="fw-form-label" for="fwFormMessage">Message <span class="fw-form-optional">optional</span></label>
+                <textarea class="fw-form-input fw-form-textarea" id="fwFormMessage" name="message" rows="4" placeholder="Tell us a bit about yourself and your interest in a Founder Wallet..."></textarea>
+              </div>
+
+              <button class="fw-form-submit" id="fwFormBtn" type="submit">Book a Call →</button>
+            </form>
+
+            <!-- Success state — shown after submission -->
+            <div class="fw-form-success" id="fwFormSuccess" aria-live="polite">
+              <div class="fw-form-success-icon" id="fwFormSuccessIcon">
+                <i class="fas fa-check" aria-hidden="true"></i>
+              </div>
+              <h3 class="fw-form-success-title">We'll be in contact shortly.</h3>
+              <p class="fw-form-success-sub">Thank you for your interest<span id="fwFormSuccessWallet"></span>. Our team will reach out within 24 hours to arrange a call at your convenience.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div class="divider"></div>
+
+    <footer>
+      <div class="footer-col">
+        <div class="footer-title">Dynk</div>
+        <span>Est. 2026</span>
+        <span>Own it, Grow it</span>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Contact</div>
+        <a class="footer-link" href="mailto:simon@dynk.io">simon@dynk.io</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Location</div>
+        <span>Dubai</span>
+        <span>Global Operations</span>
+      </div>
+    </footer>
+    <div class="footer-bottom">© 2026 Dynk</div>
+
+    <script src="founder.js"></script>
+  </body>
+</html>

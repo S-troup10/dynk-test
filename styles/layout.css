@@ -1,0 +1,652 @@
+/* ============================================================
+   LAYOUT.CSS
+   Structural containers, section grids, spacing, header,
+   footer, ambient decorations, and section-level breakpoints.
+   ============================================================ */
+
+
+/* ── HEADER ─────────────────────────────────────────────────── */
+/* SECTION: HEADER */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px clamp(24px, 6vw, 80px);
+  background: rgba(8, 8, 8, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(252, 252, 252, 0.06);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(22px, 3.2vw, 32px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.logo-sub {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  color: rgba(252, 252, 252, 0.64);
+}
+
+.logo-img {
+  width: clamp(120px, 14vw, 180px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.4));
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+}
+
+.nav span {
+  opacity: 0.82;
+}
+
+
+/* ── MAIN CONTAINER ─────────────────────────────────────────── */
+main {
+  position: relative;
+  z-index: 2;
+  padding: 30px clamp(32px, 8vw, 140px) 0;
+  display: grid;
+  gap: 130px;
+}
+
+
+/* ── SECTION: HERO ──────────────────────────────────────────── */
+.hero-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(32px, 8vw, 120px);
+  min-height: 64vh;
+}
+
+.hero {
+  display: grid;
+  gap: 16px;
+  max-width: 720px;
+}
+
+
+/* ── SECTION: SHOWCASE (NFT wallets) ────────────────────────── */
+.showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(32px, 8vw, 120px);
+  align-items: center;
+  padding: 80px 0 40px;
+}
+
+.showcase-copy {
+  display: grid;
+  gap: 14px;
+  max-width: 520px;
+}
+
+
+/* ── SECTION: PROTOCOL CIRCLE ───────────────────────────────── */
+.circle-section {
+  position: relative;
+  padding: 10px 0 40px;
+  overflow: visible;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(32px, 8vw, 120px);
+  align-items: center;
+}
+
+.circle-copy {
+  display: grid;
+  gap: 16px;
+  max-width: 520px;
+}
+
+
+/* ── SECTION: AI AGENT ──────────────────────────────────────── */
+.agent-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 8vw, 100px);
+  padding: 0;
+  width: 100%;
+  align-items: center;
+}
+
+.agent-section--static {
+  padding: 0;
+}
+
+/* AI agent sticky-scroll wrapper (used when scroll-scrub is active) */
+.agent-outer {
+  position: relative;
+  height: calc(100vh + 2000px);
+}
+
+.agent-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+
+/* ── SECTION: DYNK CARDS ────────────────────────────────────── */
+.dynk-cards-section {
+  padding: 0;
+}
+
+.dynk-cards-inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(40px, 7vw, 100px);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.dynk-cards-copy {
+  flex: 1;
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.dynk-cards-visual {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ── SECTION: WEF CAROUSEL ──────────────────────────────────── */
+.wef-section {
+  position: relative;
+  padding: clamp(80px, 12vh, 160px) clamp(24px, 6vw, 80px);
+  overflow: hidden;
+}
+
+.wef-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(252, 252, 252, 0.025), transparent 70%);
+  pointer-events: none;
+}
+
+.wef-section::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(252, 252, 252, 0.18), transparent);
+  pointer-events: none;
+}
+
+.wef-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(40px, 6vh, 72px);
+  text-align: center;
+}
+
+.wef-header {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+
+/* ── SECTION: MAILING LIST ──────────────────────────────────── */
+.mailing-section {
+  position: relative;
+  padding: 18px 0 8px;
+}
+
+.mailing-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: stretch;
+}
+
+
+/* ── SECTION: FOUNDER BOARD ─────────────────────────────────── */
+.board-section {
+  display: grid;
+  gap: 24px;
+  padding: 0;
+  position: relative;
+}
+
+.board-header {
+  display: grid;
+  gap: 12px;
+  max-width: 560px;
+}
+
+
+/* ── SECTION: STICKY SHOWCASE SCROLL (optional scroll pattern) ── */
+.showcase-scroll-outer {
+  position: relative;
+  height: calc(100vh + 1200px);
+}
+
+.showcase-scroll-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.showcase-scroll-sticky .showcase {
+  padding: clamp(20px, 4vw, 48px) 0;
+  width: 100%;
+}
+
+
+/* ── DIVIDER ─────────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mist), transparent);
+  margin: 28px 0 16px;
+}
+
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+/* SECTION: FOOTER */
+footer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 32px;
+  align-items: start;
+  padding: 14px 0 26px;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: rgba(252, 252, 252, 0.64);
+}
+
+.footer-col {
+  display: grid;
+  gap: 16px;
+}
+
+.footer-title {
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  color: rgba(252, 252, 252, 0.8);
+  margin-bottom: 4px;
+}
+
+.footer-link {
+  color: rgba(252, 252, 252, 0.7);
+  text-decoration: none;
+  letter-spacing: 0.16em;
+}
+
+.footer-link:hover {
+  color: var(--paper);
+}
+
+.footer-bottom {
+  margin-top: 44px;
+  padding-bottom: 28px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: rgba(252, 252, 252, 0.6);
+}
+
+
+/* ── AMBIENT DECORATIONS ─────────────────────────────────────── */
+/* These are purely decorative positioned elements, not components */
+.orbit1 {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(252, 252, 252, 0.15);
+  box-shadow: inset 0 0 60px rgba(252, 252, 252, 0.08);
+  right: -160px;
+  top: 120px;
+  width: 300px;
+  height: 300px;
+  opacity: 0.3;
+}
+
+.orbit1::after {
+  content: "";
+  position: absolute;
+  inset: 40px;
+  border-radius: 50%;
+  border: 1px dashed rgba(252, 252, 252, 0.3);
+}
+
+.orbit1.pos1 {
+  left: -160px;
+  right: auto;
+  top: 290%;
+  width: 300px;
+  height: 300px;
+  opacity: 0.3;
+}
+
+.pulse {
+  position: absolute;
+  left: 30%;
+  bottom: -55%;
+  width: 160px;
+  height: 160px;
+  border-radius: 40px;
+  background: linear-gradient(120deg, var(--veil), transparent);
+  transform: rotate(20deg);
+  animation: pulse 8s ease-in-out infinite;
+}
+
+.pulse.pos2 {
+  left: auto;
+  right: 10%;
+  top: 305%;
+  bottom: auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 32px;
+  background: linear-gradient(120deg, rgba(252, 252, 252, 0.08), transparent);
+  transform: rotate(-12deg);
+  animation-duration: 10s;
+}
+
+.pulse.pos3 {
+  /* Additional pulse decoration position */
+}
+
+.lux-glow {
+  position: absolute;
+  left: -20%;
+  bottom: -45%;
+  width: 500px;
+  height: 700px;
+  background: radial-gradient(circle, var(--ember), transparent 65%);
+  filter: blur(2px);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.lux-glow.pos1 {
+  left: auto;
+  right: -15%;
+  top: 30%;
+  bottom: auto;
+  width: 600px;
+  height: 600px;
+  opacity: 0;
+}
+
+.lux-glow.pos2 {
+  left: 60%;
+  bottom: -80%;
+  width: 700px;
+  height: 700px;
+  opacity: 0.4;
+  filter: blur(6px);
+}
+
+.lux-sheen {
+  position: absolute;
+  right: 8%;
+  bottom: 6%;
+  width: 520px;
+  height: 220px;
+  background: linear-gradient(120deg, transparent, var(--ember-soft), transparent);
+  transform: skewY(-6deg);
+  pointer-events: none;
+}
+
+.lux-sheen.pos2 {
+  left: 10%;
+  right: auto;
+  bottom: -95%;
+  width: 420px;
+  height: 160px;
+  opacity: 0.6;
+  transform: skewY(6deg);
+}
+
+
+/* ── RESPONSIVE: LAYOUT ──────────────────────────────────────── */
+@media (max-width: 1100px) {
+  main {
+    padding: 15px clamp(24px, 6vw, 80px) 0;
+  }
+
+  .hero-wrap,
+  .showcase,
+  .circle-section {
+    gap: clamp(28px, 6vw, 80px);
+  }
+}
+
+@media (max-width: 900px) {
+  header {
+    padding: 28px clamp(20px, 5vw, 56px);
+  }
+
+  main {
+    padding: 56px clamp(20px, 5vw, 56px) 0;
+    gap: 80px;
+  }
+
+  .nav {
+    letter-spacing: 0.2em;
+  }
+
+  .hero-wrap {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .circle-section {
+    grid-template-columns: 1fr;
+  }
+
+  .board-section {
+    padding: 40px 0 0;
+  }
+
+  .board-header {
+    max-width: 100%;
+  }
+
+  .agent-outer {
+    height: calc(100vh + 1650px);
+  }
+
+  .agent-sticky {
+    align-items: flex-start;
+    padding: 28px 0;
+    height: 100svh;
+  }
+
+  .agent-section {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 0;
+    align-content: start;
+    justify-items: center;
+  }
+}
+
+@media (max-width: 860px) {
+  .dynk-cards-inner {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px 16px;
+  }
+
+  main {
+    padding: 28px 16px 0;
+    gap: 48px;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    max-width: 320px;
+    display: none;
+  }
+
+  .hero-wrap {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    min-height: auto;
+  }
+
+  .showcase {
+    padding: 24px 0 12px;
+    gap: 20px;
+  }
+
+  .circle-section {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 8px 0 20px;
+    justify-items: center;
+  }
+
+  .mailing-section {
+    padding: 0 20px;
+  }
+
+  .mailing-shell {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .wef-section {
+    padding: 56px 20px 48px;
+  }
+
+  .orbit1,
+  .pulse,
+  .lux-glow,
+  .lux-sheen {
+    display: none;
+  }
+
+  footer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+
+  .footer-title {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+  }
+
+  .divider {
+    margin: 18px 0 12px;
+  }
+
+  .showcase-scroll-outer {
+    height: auto;
+  }
+
+  .showcase-scroll-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+    display: block;
+  }
+
+  .agent-outer {
+    height: calc(100svh + 1500px);
+  }
+
+  .agent-sticky {
+    padding: 22px 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+
+  .agent-outer {
+    height: calc(100svh + 1600px);
+  }
+
+  .agent-sticky {
+    padding: 18px 0;
+  }
+
+  .agent-section {
+    gap: 20px;
+    padding: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-scroll-outer {
+    height: auto;
+  }
+
+  .showcase-scroll-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+    display: block;
+  }
+
+  .agent-outer {
+    height: auto;
+  }
+
+  .agent-sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+}
