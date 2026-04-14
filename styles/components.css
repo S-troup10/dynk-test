@@ -39,7 +39,7 @@
   font-size: 11px;
   letter-spacing: 0.58em;
   text-transform: uppercase;
-  color: rgba(252, 252, 252, 0.3);
+  color: rgba(252, 252, 252, 0.6);
   margin-bottom: 18px;
   opacity: 0;
   animation: introFadeUp 0.6s ease 0.25s both;
@@ -60,7 +60,7 @@
   font-size: 11px;
   letter-spacing: 0.46em;
   text-transform: uppercase;
-  color: rgba(252, 252, 252, 0.28);
+  color: rgba(252, 252, 252, 0.6);
   margin-bottom: 44px;
   opacity: 0;
   animation: introFadeUp 0.5s ease 1.05s both;
@@ -171,7 +171,7 @@
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: rgba(252, 252, 252, 0.45);
+  color: rgba(252, 252, 252, 0.7);
 }
 
 
@@ -345,7 +345,7 @@
 }
 
 .nft-chevron {
-  color: rgba(252, 252, 252, 0.35);
+  color: rgba(252, 252, 252, 0.6);
   font-size: 12px;
   transition: transform 0.3s ease, color 0.25s;
   flex-shrink: 0;
@@ -676,7 +676,7 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   font-weight: 600;
-  color: rgba(252, 252, 252, 0.45);
+  color: rgba(252, 252, 252, 0.7);
   transition: color 0.5s ease;
 }
 
@@ -684,7 +684,7 @@
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(252, 252, 252, 0.3);
+  color: rgba(252, 252, 252, 0.6);
   transition: color 0.5s ease;
   flex-shrink: 0;
 }
@@ -1105,7 +1105,7 @@
   position: absolute;
   bottom: 18px;
   right: 18px;
-  color: rgba(252, 252, 252, 0.4);
+  color: rgba(252, 252, 252, 0.65);
   font-size: 18px;
   transform: rotate(90deg);
 }
@@ -1890,7 +1890,7 @@
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(252, 252, 252, 0.45);
+  color: rgba(252, 252, 252, 0.7);
 }
 
 .founder-teaser-badge {
@@ -2263,7 +2263,7 @@
   }
 
   .scroll-card-tag {
-    color: rgba(252, 252, 252, 0.5);
+    color: rgba(252, 252, 252, 0.65);
   }
 
   .scroll-card .scroll-card-body,
@@ -2431,7 +2431,7 @@
   }
 
   .scroll-card-tag {
-    color: rgba(252, 252, 252, 0.5);
+    color: rgba(252, 252, 252, 0.65);
   }
 
   .agent-section {

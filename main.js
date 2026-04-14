@@ -550,7 +550,8 @@ if (boardGridStatic) {
       tile.style.cursor = "pointer";
       tile.setAttribute("title", `Select Wallet #${String(i).padStart(4, "0")}`);
       tile.addEventListener("click", () => {
-        window.location.href = `founder-wallets.html?wallet=${String(i).padStart(4, "0")}`;
+        localStorage.setItem("dynk_selected_wallet", String(i).padStart(4, "0"));
+        window.location.href = "founder-wallets.html";
       });
     }
 

@@ -4,16 +4,78 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no" />
-    <title>DYNK</title>
+    <title>DYNK — The Ultimate Solana-Powered Digital Wallet</title>
+    <meta name="description" content="DYNK is a Solana-powered digital wallet ecosystem offering NFT wallets, AI agents, 1¢ transactions, and monetised distribution. Claim one of 800 Founder Wallets today." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://dynk.io/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dynk.io/" />
+    <meta property="og:title" content="DYNK — The Ultimate Solana-Powered Digital Wallet" />
+    <meta property="og:description" content="DYNK is a Solana-powered digital wallet ecosystem offering NFT wallets, AI agents, 1¢ transactions, and monetised distribution. Claim one of 800 Founder Wallets today." />
+    <meta property="og:image" content="https://dynk.io/media/images/coin2.png" />
+    <meta property="og:site_name" content="DYNK" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DYNK — The Ultimate Solana-Powered Digital Wallet" />
+    <meta name="twitter:description" content="DYNK is a Solana-powered digital wallet ecosystem offering NFT wallets, AI agents, 1¢ transactions, and monetised distribution. Claim one of 800 Founder Wallets today." />
+    <meta name="twitter:image" content="https://dynk.io/media/images/coin2.png" />
+
+    <meta name="robots" content="index, follow" />
+
     <link rel="icon" type="image/png" href="media/images/icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="media/images/coin2.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <!-- Styles: base → layout → components (load order matters) -->
     <link rel="stylesheet" href="styles/base.css" />
     <link rel="stylesheet" href="styles/layout.css" />
     <link rel="stylesheet" href="styles/components.css" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "DYNK",
+          "url": "https://dynk.io",
+          "logo": "https://dynk.io/media/images/icon.png",
+          "foundingDate": "2026",
+          "description": "DYNK is a Solana-powered digital wallet ecosystem uniting NFT wallets, AI agents, instant 1¢ transactions, and monetised distribution.",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "simon@dynk.io",
+            "contactType": "customer support"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dubai",
+            "addressCountry": "AE"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "name": "DYNK",
+          "url": "https://dynk.io"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://dynk.io/",
+          "name": "DYNK — The Ultimate Solana-Powered Digital Wallet",
+          "description": "DYNK is a Solana-powered digital wallet ecosystem offering NFT wallets, AI agents, 1¢ transactions, and monetised distribution. Claim one of 800 Founder Wallets today.",
+          "isPartOf": { "@id": "https://dynk.io" }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
 
@@ -36,7 +98,7 @@
       <div class="logo">
         <img class="logo-img" src="media/images/DYNK.png" alt="DYNK logo" />
       </div>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main navigation">
         <span>Own it, Grow it</span>
       </nav>
     </header>
@@ -69,7 +131,7 @@
           <a class="cta" href="founder-wallets.html">Get Your Wallet →</a>
         </div>
         <div class="hero-media">
-          <img src="media/images/coin2.png" alt="DYNK coin" />
+          <img src="media/images/coin2.png" alt="DYNK coin" fetchpriority="high" />
         </div>
       </section>
       <!-- SECTION: HERO END -->
@@ -77,7 +139,7 @@
       <!-- SECTION: SHOWCASE (NFT Wallets) START -->
       <section class="showcase reveal delay-2">
         <div class="hero-media phone-media">
-          <img src="media/images/phone.png" alt="DYNK wallet on phone" />
+          <img src="media/images/phone.png" alt="DYNK wallet on phone" loading="lazy" />
         </div>
         <div class="showcase-copy">
           <div class="showcase-kicker">NFT wallets</div>
@@ -194,7 +256,7 @@
           <div class="circle-center">
             <div class="circle-flip" id="circleFlip">
               <div class="circle-face front">
-                <img src="media/images/darkCoin.png" alt="Dynk logo" />
+                <img src="media/images/darkCoin.png" alt="Dynk coin" loading="lazy" />
               </div>
               <div class="circle-face back">
                 <div class="circle-back" id="circleBack">
@@ -314,7 +376,7 @@
       <section class="agent-section agent-section--static reveal delay-2">
         <div class="agent-video-col">
           <div class="agent-video-wrap">
-            <img src="media/images/aiimage.png" alt="DYNK AI Agent" class="agent-static-img" />
+            <img src="media/images/aiimage.png" alt="DYNK AI Agent" class="agent-static-img" loading="lazy" />
             <div class="agent-video-grad"></div>
           </div>
         </div>
@@ -346,53 +408,9 @@
       </section>
       <!-- SECTION: AI AGENT END -->
 
-      <!-- SECTION: DYNK CARDS START -->
-      <section class="dynk-cards-section reveal delay-2">
-        <div class="dynk-cards-inner">
-          <div class="dynk-cards-copy">
-            <div class="showcase-kicker">Physical meets digital</div>
-            <h2 class="showcase-title">Dynk Card</h2>
-            <p class="lead">Your DYNK wallet in your pocket. Powered by Tangem's industry-leading hardware security, the Dynk Card gives you instant, tap-to-pay access to your digital assets anywhere in the world.</p>
-            <a class="cta cta--sm" href="dynk-card.html">Learn More →</a>
-          </div>
-          <div class="dynk-cards-visual">
-            <img src="media/images/card.png" alt="Dynk Card" class="dynk-card-img" />
-          </div>
-        </div>
-      </section>
+     
       <!-- SECTION: DYNK CARDS END -->
 
-      <!-- SECTION: WEF CAROUSEL START -->
-      <section class="wef-section reveal delay-3">
-        <div class="wef-inner">
-          <div class="wef-header">
-            <div class="wef-badge">
-              <i class="fas fa-landmark" aria-hidden="true"></i>
-              <span>WEF Davos 2026</span>
-            </div>
-            <div class="showcase-kicker">Signal from the room</div>
-            <h2 class="wef-title">World Economic Forum<br>on Crypto</h2>
-            <p class="wef-sub">The world is now awoken, as evidenced by the commentary at the world economic forum 2026.</p>
-          </div>
-
-          <div class="wef-stage">
-            <button class="wef-btn" id="wefPrev" type="button" aria-label="Previous quote">
-              <i class="fas fa-chevron-left" aria-hidden="true"></i>
-            </button>
-            <div class="wef-quote-frame" id="wefFrame">
-              <div class="wef-deco-quote" aria-hidden="true">"</div>
-              <blockquote class="wef-quote-text" id="wefText"></blockquote>
-              <div class="wef-quote-author" id="wefAuthor"></div>
-            </div>
-            <button class="wef-btn" id="wefNext" type="button" aria-label="Next quote">
-              <i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </button>
-          </div>
-
-          <div class="wef-dots" id="wefDots" role="tablist"></div>
-        </div>
-      </section>
-      <!-- SECTION: WEF CAROUSEL END -->
 
       <!-- SECTION: FOUNDER BOARD START -->
       <section class="board-section reveal delay-3">
@@ -436,58 +454,20 @@
       </section>
       <!-- SECTION: FOUNDER BOARD END -->
 
-      <!-- SECTION: MAILING LIST START -->
-      <section class="mailing-section reveal delay-3" aria-labelledby="mailingTitle">
-        <div class="mailing-shell">
-          <div class="mailing-copy">
-            <div class="showcase-kicker">Email list</div>
-            <h2 class="showcase-title" id="mailingTitle">Discover the Future of Money</h2>
-            <p class="mailing-sub">
-              Join the email list for updates on Dynk and early access opportunities.
-            </p>
-            <form class="mailing-form" id="mailingForm">
-              <label class="mailing-input-wrap" for="mailingEmail">
-                <input
-                  class="mailing-input"
-                  id="mailingEmail"
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email address"
-                  autocomplete="email"
-                  required
-                />
-                <button class="mailing-submit" type="submit">Join</button>
-                <span class="mailing-success-mark" aria-hidden="true">
-                  <i class="fas fa-check"></i>
-                </span>
-              </label>
-            </form>
-            <p class="mailing-status" id="mailingStatus" aria-live="polite"></p>
-          </div>
-
-          <div class="mailing-cards" aria-hidden="true">
-            <div class="mailing-panel">
-              <div class="mailing-mini-grid">
-                <div class="mailing-mini">
-                  <span class="mailing-mini-value">Early access</span>
-                  <p class="mailing-mini-copy">Be the first to hear about the latest advancements and opportunities in DYNK.</p>
-                </div>
-                <div class="mailing-mini">
-                  <span class="mailing-mini-value">Key updates</span>
-                  <p class="mailing-mini-copy">Stay up to date with the latest developments in the digital wallet and crypto spaces.</p>
-                </div>
-                <div class="mailing-mini">
-                  <span class="mailing-mini-value">Signal only</span>
-                  <p class="mailing-mini-copy">Receive only relevant information we think you should be aware of.<br>No unnecessary noise.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- SECTION: MAILING LIST END -->
+    
 
       <div class="divider"></div>
+
+      <!-- SECTION: FOUNDER WALLET CTA START -->
+      <section class="founder-cta-section reveal delay-3">
+        <div class="founder-cta-inner">
+          <div class="founder-cta-kicker">Founder Wallets</div>
+          <h2 class="founder-cta-heading">The First Wallets.<br>The Highest Access.</h2>
+          <p class="founder-cta-body">Founder Wallets are the founding tier of Dynk — built for those who move first. Learn what's inside.</p>
+          <a class="cta" href="founder-wallets.html">Learn More About Founder Wallets →</a>
+        </div>
+      </section>
+      <!-- SECTION: FOUNDER WALLET CTA END -->
 
       <!-- SECTION: FOOTER START -->
       <footer>
@@ -498,12 +478,20 @@
         </div>
         <div class="footer-col">
           <div class="footer-title">Contact</div>
-          <a class="footer-link" href="mailto:simon@dynk.io">simon@dynk.io</a>
+          <address style="font-style:normal">
+            <a class="footer-link" href="mailto:simon@dynk.io">simon@dynk.io</a>
+          </address>
         </div>
         <div class="footer-col">
           <div class="footer-title">Location</div>
           <span>Dubai</span>
           <span>Global Operations</span>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title">Pages</div>
+          <a class="footer-link" href="index.html">Home</a>
+          <a class="footer-link" href="founder-wallets.html">Founder Wallets</a>
+          <a class="footer-link" href="dynk-card.html">Dynk Card</a>
         </div>
       </footer>
       <div class="footer-bottom">© 2026 Dynk</div>

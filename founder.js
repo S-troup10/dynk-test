@@ -1,10 +1,10 @@
 const SOLD_IDS = new Set([1, 2, 3, 4, 5, 6, 8, 10, 11, 16, 18, 21, 25, 67, 87, 90, 100, 22, 667, 211, 500]);
 const WALLET_COUNT = 800;
 
-// ── URL params ──────────────────────────────────────────────────────────────
-const params           = new URLSearchParams(window.location.search);
-const selectedWalletStr = params.get("wallet");
+// ── Pre-selected wallet (passed via localStorage from index board) ───────────
+const selectedWalletStr = localStorage.getItem("dynk_selected_wallet");
 const selectedWalletNum = selectedWalletStr ? parseInt(selectedWalletStr, 10) : null;
+if (selectedWalletStr) localStorage.removeItem("dynk_selected_wallet");
 
 // ── Element refs ────────────────────────────────────────────────────────────
 const fwGrid            = document.getElementById("fwGrid");
@@ -174,10 +174,6 @@ function selectWallet(num, clickedTile) {
   updateCta(padded);
   showCallout(padded);
   updateForm(padded);
-
-  const url = new URL(window.location);
-  url.searchParams.set("wallet", padded);
-  history.replaceState(null, "", url);
 
   // Show pill + run reveal
   setTimeout(() => {

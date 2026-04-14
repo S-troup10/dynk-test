@@ -278,6 +278,48 @@ main {
 }
 
 
+/* ── FOUNDER WALLET CTA ──────────────────────────────────────── */
+/* SECTION: FOUNDER WALLET CTA */
+.founder-cta-section {
+  padding: 100px 0 80px;
+  text-align: center;
+  border-top: 1px solid rgba(252, 252, 252, 0.08);
+}
+
+.founder-cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.founder-cta-kicker {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(252, 252, 252, 0.65);
+}
+
+.founder-cta-heading {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--paper);
+  margin: 0;
+}
+
+.founder-cta-body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(252, 252, 252, 0.75);
+  max-width: 480px;
+  margin: 0;
+}
+
 /* ── FOOTER ──────────────────────────────────────────────────── */
 /* SECTION: FOOTER */
 footer {

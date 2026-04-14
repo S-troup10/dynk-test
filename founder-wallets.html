@@ -4,14 +4,102 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no" />
-    <title>Founder Wallets — DYNK</title>
+    <title>DYNK Founder Wallets — Own One of 800 Exclusive Solana NFT Wallets</title>
+    <meta name="description" content="Claim one of 800 DYNK Founder Wallets at $10,000 each. Get permanent transaction revenue share, governance rights, 3-level referrals, and a tradable Solana NFT — forever." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://dynk.io/founder-wallets.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dynk.io/founder-wallets.html" />
+    <meta property="og:title" content="DYNK Founder Wallets — Own One of 800 Exclusive Solana NFT Wallets" />
+    <meta property="og:description" content="Claim one of 800 DYNK Founder Wallets at $10,000 each. Get permanent transaction revenue share, governance rights, 3-level referrals, and a tradable Solana NFT — forever." />
+    <meta property="og:image" content="https://dynk.io/media/images/founder wallet.png" />
+    <meta property="og:site_name" content="DYNK" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DYNK Founder Wallets — Own One of 800 Exclusive Solana NFT Wallets" />
+    <meta name="twitter:description" content="Claim one of 800 DYNK Founder Wallets at $10,000 each. Get permanent transaction revenue share, governance rights, 3-level referrals, and a tradable Solana NFT — forever." />
+    <meta name="twitter:image" content="https://dynk.io/media/images/founder wallet.png" />
+
+    <meta name="robots" content="index, follow" />
+
     <link rel="icon" type="image/png" href="media/images/icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="media/images/founder wallet.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="founder.css" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "url": "https://dynk.io/founder-wallets.html",
+          "name": "DYNK Founder Wallets — Own One of 800 Exclusive Solana NFT Wallets",
+          "description": "Claim one of 800 DYNK Founder Wallets at $10,000 each. Get permanent transaction revenue share, governance rights, 3-level referrals, and a tradable Solana NFT — forever.",
+          "isPartOf": { "@id": "https://dynk.io" },
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dynk.io/" },
+              { "@type": "ListItem", "position": 2, "name": "Founder Wallets", "item": "https://dynk.io/founder-wallets.html" }
+            ]
+          }
+        },
+        {
+          "@type": "Product",
+          "name": "DYNK Founder Wallet",
+          "description": "One of 800 exclusive DYNK Founder Wallets. A Solana-based NFT wallet granting permanent transaction revenue share, governance voting rights, 3-level referral rewards, and lifetime ecosystem benefits.",
+          "brand": { "@type": "Brand", "name": "DYNK" },
+          "offers": {
+            "@type": "Offer",
+            "price": "10000",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/LimitedAvailability",
+            "url": "https://dynk.io/founder-wallets.html"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is a DYNK Founder Wallet?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A DYNK Founder Wallet is one of only 800 exclusive Solana-based NFT wallets that grants permanent transaction revenue share, governance rights, 3-level referral rewards, and full non-custodial ownership."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much does a DYNK Founder Wallet cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Each DYNK Founder Wallet is priced at $10,000 USD — a one-time acquisition price with lifetime benefits and no ongoing fees."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How many DYNK Founder Wallets are available?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "There are only 800 Founder Wallets ever issued, numbered 0001–0800. The supply is fixed on-chain at genesis and can never be increased."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
 
@@ -46,7 +134,7 @@
           <img class="logo-img" src="media/images/DYNK.png" alt="DYNK logo" />
         </a>
       </div>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main navigation">
         <a href="index.html" class="fw-nav-back">
           <i class="fas fa-arrow-left" aria-hidden="true"></i> Back
         </a>
@@ -80,7 +168,7 @@
           <a class="cta" href="#fw-board">Select Your Wallet ↓</a>
         </div>
         <div class="fw-hero-coin reveal delay-2" aria-hidden="true">
-          <img src="media/images/founder wallet.png" alt="Founder Wallet" class="fw-coin-img" />
+          <img src="media/images/founder wallet.png" alt="DYNK Founder Wallet NFT" class="fw-coin-img" fetchpriority="high" />
         </div>
       </section>
 
@@ -127,7 +215,7 @@
       <section class="fw-about reveal">
         <div class="fw-about-inner">
           <div class="fw-about-statement">
-            <img src="media/images/founder page.png" alt="Founder Wallet visual" class="fw-about-image" />
+            <img src="media/images/founder page.png" alt="DYNK Founder Wallet — NFT wallet on Solana" class="fw-about-image" loading="lazy" />
           </div>
           <div class="fw-about-body">
             <div class="eyebrow">What is a Founder Wallet?</div>
@@ -386,12 +474,20 @@
       </div>
       <div class="footer-col">
         <div class="footer-title">Contact</div>
-        <a class="footer-link" href="mailto:simon@dynk.io">simon@dynk.io</a>
+        <address style="font-style:normal">
+          <a class="footer-link" href="mailto:simon@dynk.io">simon@dynk.io</a>
+        </address>
       </div>
       <div class="footer-col">
         <div class="footer-title">Location</div>
         <span>Dubai</span>
         <span>Global Operations</span>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Pages</div>
+        <a class="footer-link" href="index.html">Home</a>
+        <a class="footer-link" href="founder-wallets.html">Founder Wallets</a>
+        <a class="footer-link" href="dynk-card.html">Dynk Card</a>
       </div>
     </footer>
     <div class="footer-bottom">© 2026 Dynk</div>
