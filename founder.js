@@ -259,28 +259,23 @@ if (fwContactForm && fwFormBtn) {
     const wallet  = (fwContactForm.querySelector("#fwFormWallet")?.value  || "").trim();
     const phone   = (fwContactForm.querySelector("#fwFormPhone")?.value   || "").trim();
     const message = (fwContactForm.querySelector("#fwFormMessage")?.value || "").trim();
-    const subject = wallet
-      ? `Founder Wallet ${wallet} Enquiry`
-      : "Founder Wallet Enquiry";
 
     try {
-      const res = await fetch("https://api.staticforms.xyz/submit", {
+      const res = await fetch(window.AUTO_REPLY_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          accessKey: "sf_47101be9907d2407a1ce5375",
-          name:      name.value.trim(),
-          email:     email.value.trim(),
-          phone,
-          subject,
-          replyTo:   "@",
-          message:   `Wallet: ${wallet || "Not selected"}\n\n${message}`,
+          name:    name.value.trim(),
+          email:   email.value.trim(),
+          wallet:  wallet || "",
+          phone:   phone  || "",
+          message: message || "",
         }),
       });
 
       const data = await res.json();
 
-      if (data.success) {
+      if (data.ok) {
         showFormSuccess(wallet);
       } else {
         resetFormBtn("Try Again →");

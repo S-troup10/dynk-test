@@ -165,25 +165,7 @@ if (wefText && wefAuthor && wefDotsEl) {
 }
 
 
-/* ── 4. MAILING FORM ──────────────────────────────────────────── */
-const mailingForm      = document.getElementById("mailingForm");
-const mailingEmail     = document.getElementById("mailingEmail");
-const mailingStatus    = document.getElementById("mailingStatus");
-const mailingInputWrap = document.querySelector(".mailing-input-wrap");
-
-if (mailingForm && mailingEmail && mailingStatus && mailingInputWrap) {
-  mailingForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (!mailingForm.reportValidity()) return;
-
-    mailingInputWrap.classList.add("is-success");
-    mailingEmail.disabled     = true;
-    mailingStatus.textContent = "Thanks, you are on the list. We will be in touch soon.";
-  });
-}
-
-
-/* ── 5. PROTOCOL CIRCLE ───────────────────────────────────────── */
+/* ── 4. PROTOCOL CIRCLE ───────────────────────────────────────── */
 const circleFlip          = document.getElementById("circleFlip");
 const circleBackTitle     = document.getElementById("circleBackTitle");
 const circleBackText      = document.getElementById("circleBackText");

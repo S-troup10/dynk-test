@@ -219,21 +219,6 @@ main {
 }
 
 
-/* ── SECTION: MAILING LIST ──────────────────────────────────── */
-.mailing-section {
-  position: relative;
-  padding: 18px 0 8px;
-}
-
-.mailing-shell {
-  max-width: 1180px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(28px, 5vw, 72px);
-  align-items: stretch;
-}
-
 
 /* ── SECTION: FOUNDER BOARD ─────────────────────────────────── */
 .board-section {
@@ -592,15 +577,6 @@ footer {
     gap: 24px;
     padding: 8px 0 20px;
     justify-items: center;
-  }
-
-  .mailing-section {
-    padding: 0 20px;
-  }
-
-  .mailing-shell {
-    grid-template-columns: 1fr;
-    gap: 24px;
   }
 
   .wef-section {
