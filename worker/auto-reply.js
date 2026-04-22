@@ -12,6 +12,7 @@
 
 const ALLOWED_ORIGINS = new Set([
   "https://dynk.io",
+  "https://www.dynk.io",
   "http://127.0.0.1:5501",
   "http://localhost:5501",
 ]);
@@ -82,9 +83,9 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "DYNK <noreply@dynk.io>",
+          from: "Simon at DYNK <contact@dynk.io>",
           to:   email,
-          subject: "We've received your application — DYNK",
+          subject: "Got your details — DYNK",
           html: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,13 +103,13 @@ export default {
 
         <!-- Top accent line -->
         <tr>
-          <td style="height:1px;background:linear-gradient(90deg,transparent,rgba(252,252,252,0.18),transparent);font-size:0;line-height:0;">&nbsp;</td>
+          <td style="height:2px;background:linear-gradient(90deg,transparent,rgba(252,252,252,0.18),transparent);font-size:0;line-height:0;">&nbsp;</td>
         </tr>
 
-        <!-- Header -->
+        <!-- Header wordmark -->
         <tr>
           <td align="center" style="padding:48px 48px 40px;">
-            <img src="https://dynk.io/media/images/DYNK.png" alt="DYNK" width="320" style="display:block;height:auto;"/>
+            <span style="font-family:Georgia,serif;font-size:36px;font-weight:400;letter-spacing:0.45em;color:#fcfcfc;text-transform:uppercase;">DYNK</span>
           </td>
         </tr>
 
@@ -123,33 +124,23 @@ export default {
         <tr>
           <td style="padding:48px 48px 40px;">
 
-            <!-- Eyebrow -->
-            <p style="margin:0 0 32px;font-family:Georgia,serif;font-size:11px;letter-spacing:0.5em;text-transform:uppercase;color:rgba(252,252,252,0.35);">Application Received</p>
-
-            <!-- Heading -->
-            <h1 style="margin:0 0 24px;font-family:Georgia,serif;font-size:28px;font-weight:400;line-height:1.3;color:#fcfcfc;letter-spacing:0.02em;">Thank you,<br/>${escHtml(name)}.</h1>
+            <!-- Greeting -->
+            <p style="margin:0 0 24px;font-family:Georgia,serif;font-size:16px;line-height:1.8;color:#fcfcfc;">Hi ${escHtml(name)},</p>
 
             <!-- Body text -->
-            <p style="margin:0 0 20px;font-family:Georgia,serif;font-size:15px;line-height:1.8;color:rgba(252,252,252,0.6);">
-              We've received your enquiry regarding ${walletLabel} and we're pleased to have you with us.
+            <p style="margin:0 0 20px;font-family:Georgia,serif;font-size:15px;line-height:1.9;color:rgba(252,252,252,0.7);">
+              Just a quick note to say we got your details — thanks for reaching out about ${walletLabel}.
             </p>
-            <p style="margin:0 0 40px;font-family:Georgia,serif;font-size:15px;line-height:1.8;color:rgba(252,252,252,0.6);">
-              A member of our team will be in touch shortly to arrange a call at your convenience.
+            <p style="margin:0 0 20px;font-family:Georgia,serif;font-size:15px;line-height:1.9;color:rgba(252,252,252,0.7);">
+              I'll be in touch personally within the next day or two to set up a call and walk you through everything.
             </p>
-
-            <!-- CTA button -->
-            <table cellpadding="0" cellspacing="0" style="margin-bottom:40px;">
-              <tr>
-                <td style="border:1px solid rgba(252,252,252,0.2);border-radius:2px;">
-                  <a href="https://dynk.io" style="display:inline-block;padding:14px 32px;font-family:Georgia,serif;font-size:11px;letter-spacing:0.35em;text-transform:uppercase;color:#fcfcfc;text-decoration:none;">Visit dynk.io</a>
-                </td>
-              </tr>
-            </table>
+            <p style="margin:0 0 40px;font-family:Georgia,serif;font-size:15px;line-height:1.9;color:rgba(252,252,252,0.7);">
+              In the meantime, feel free to reply here if anything comes to mind.
+            </p>
 
             <!-- Sign-off -->
-            <p style="margin:0;font-family:Georgia,serif;font-size:13px;line-height:1.7;color:rgba(252,252,252,0.35);">
-              The DYNK Team
-            </p>
+            <p style="margin:0 0 4px;font-family:Georgia,serif;font-size:15px;line-height:1.7;color:rgba(252,252,252,0.55);">Simon</p>
+            <p style="margin:0;font-family:Georgia,serif;font-size:13px;line-height:1.7;color:rgba(252,252,252,0.3);">DYNK</p>
 
           </td>
         </tr>
